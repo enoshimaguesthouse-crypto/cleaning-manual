@@ -1,0 +1,1670 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f5e57">
+<meta name="robots" content="noindex, nofollow">
+<title>清掃マニュアル｜ENOSHIMA GUESTHOUSE 134</title>
+<style>
+:root{
+  --bg:#f4f7f6; --card:#ffffff; --ink:#1b2b29; --sub:#5b6f6c; --line:#dfe7e5;
+  --brand:#0f5e57; --brand-2:#13786f; --brand-soft:#e3f1ee;
+  --warn-bg:#fff4e5; --warn-line:#f0a640; --warn-ink:#7a4300;
+  --danger-bg:#fdecec; --danger-line:#e05656; --danger-ink:#8a1c1c;
+  --ok:#1f8a5b; --radius:16px; --shadow:0 1px 2px rgba(16,40,37,.06),0 4px 14px rgba(16,40,37,.06);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI",Meiryo,system-ui,sans-serif;
+  font-size:17px;line-height:1.7;-webkit-text-size-adjust:100%;padding-bottom:env(safe-area-inset-bottom)}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+/* ---- ヘッダー ---- */
+.top{position:sticky;top:0;z-index:20;background:var(--brand);color:#fff;
+  padding:calc(10px + env(safe-area-inset-top)) 12px 10px;display:flex;align-items:center;gap:8px;min-height:60px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.top .back{flex:none;border:0;background:rgba(255,255,255,.16);color:#fff;border-radius:12px;
+  height:44px;padding:0 14px 0 10px;display:flex;align-items:center;gap:2px;font-size:16px;font-weight:600;cursor:pointer}
+.top .back:active{background:rgba(255,255,255,.3)}
+.top .back svg{width:22px;height:22px}
+.top .ttl{flex:1;min-width:0}
+.top .ttl small{display:block;font-size:12px;opacity:.8;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .ttl b{display:block;font-size:18px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .home{flex:none;border:0;background:transparent;color:#fff;width:44px;height:44px;border-radius:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.top .home svg{width:24px;height:24px}
+
+main{max-width:760px;margin:0 auto;padding:16px 16px 40px}
+.banner{font-size:14px;border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.banner.demo{background:#eef3ff;color:#2b3f7a;border:1px solid #cdd8f7}
+.banner.offline{background:var(--warn-bg);color:var(--warn-ink);border:1px solid #f5d29d}
+.status{font-size:13px;color:var(--sub);text-align:right;margin:-6px 2px 10px;min-height:20px}
+
+h2.sec{font-size:15px;color:var(--sub);font-weight:700;margin:22px 4px 10px;letter-spacing:.04em}
+h2.sec:first-child{margin-top:4px}
+
+/* ---- 施設ボタン（トップ） ---- */
+.facs{display:flex;flex-direction:column;gap:12px}
+@media (min-width:600px){.facs{display:grid;grid-template-columns:1fr 1fr}}
+.fbtn{display:flex;align-items:center;gap:12px;min-height:88px;padding:16px 16px 16px 20px;border-radius:var(--radius);
+  background:var(--card);border:1px solid var(--line);border-left:7px solid var(--brand);box-shadow:var(--shadow);text-decoration:none;cursor:pointer}
+.fbtn:active{background:#f8fbfa;transform:scale(.99)}
+.fbtn .tx{flex:1;min-width:0}
+.fbtn b{display:block;font-size:21px;line-height:1.35}
+.fbtn .tx small{display:block;font-size:14px;color:var(--sub);margin-top:2px}
+.fbtn .chev{flex:none;color:var(--brand);width:26px;height:26px}
+
+/* ---- 行リスト ---- */
+.list{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;align-items:center;gap:12px;min-height:72px;padding:14px 14px 14px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);text-decoration:none;cursor:pointer}
+.row:active{background:#f8fbfa}
+.row .ic{flex:none;width:44px;height:44px;border-radius:12px;background:var(--brand-soft);display:flex;align-items:center;justify-content:center;font-size:24px}
+.row .tx{flex:1;min-width:0}
+.row .tx b{display:block;font-size:17px;line-height:1.4}
+.row .tx small{display:block;font-size:13px;color:var(--sub);line-height:1.4;margin-top:2px}
+.row .chev{flex:none;color:#9fb3b0;width:22px;height:22px}
+
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:22px;text-align:center;color:var(--sub);font-size:15px}
+
+/* ---- マニュアル詳細 ---- */
+.mhead{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.mhead h1{font-size:22px;line-height:1.4;margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;background:var(--brand-soft);color:var(--brand);border-radius:999px;padding:3px 12px;font-weight:600}
+.purpose{margin:12px 0 0;color:#2c3f3c}
+
+.block{background:var(--card);border-radius:var(--radius);padding:16px 18px;border:1px solid var(--line);box-shadow:var(--shadow);margin-top:14px}
+.block h3{font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.block h3 .b{font-size:18px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tools li{background:#f1f5f4;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:15px}
+
+.alert{border-radius:var(--radius);padding:14px 16px;margin-top:14px;background:var(--danger-bg);border:2px solid var(--danger-line);color:var(--danger-ink)}
+.alert h3{margin:0 0 6px;font-size:16px;display:flex;align-items:center;gap:6px}
+.alert ul{margin:0;padding-left:1.2em}
+.alert li{font-weight:600;margin:2px 0}
+
+.video{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-note{font-size:13px;color:var(--sub);margin-top:6px}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.step{display:flex;gap:12px;align-items:flex-start}
+.step .no{flex:none;width:36px;height:36px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;
+  display:flex;align-items:center;justify-content:center;font-size:17px;margin-top:2px}
+.step .body{flex:1;min-width:0}
+.step .body p{margin:0;font-size:17px}
+.step.imp .body{background:var(--warn-bg);border:2px solid var(--warn-line);border-radius:12px;padding:10px 12px}
+.step.imp .no{background:var(--warn-line)}
+.step .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--warn-ink);background:#ffe2b8;border-radius:6px;padding:1px 8px;margin-bottom:4px}
+.photo{display:block;margin-top:10px;border-radius:12px;overflow:hidden;background:#eef2f1;border:0;padding:0;width:100%;cursor:zoom-in}
+.photo img{display:block;width:100%;height:auto;min-height:120px;object-fit:cover}
+.photo .err{display:none;padding:28px 12px;color:var(--sub);font-size:14px;text-align:center}
+.photo.broken img{display:none}.photo.broken .err{display:block}
+
+.done{background:#eef8f2;border:1px solid #bfe3cf;border-radius:12px;padding:12px 14px;color:#1d4d35}
+
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.checks button{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;text-align:left;border:1px solid var(--line);
+  background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer;font-size:16px}
+.checks .box{flex:none;width:26px;height:26px;border-radius:7px;border:2px solid #9fb3b0;display:flex;align-items:center;justify-content:center;color:#fff}
+.checks button.on{background:#eef8f2;border-color:#bfe3cf}
+.checks button.on .box{background:var(--ok);border-color:var(--ok)}
+.checks button.on span.t{color:#4b6a5c;text-decoration:line-through}
+.checkmeta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:14px;color:var(--sub)}
+.linkbtn{border:0;background:none;color:var(--brand);font-weight:600;padding:8px 4px;cursor:pointer;font-size:14px}
+.updated{font-size:13px;color:var(--sub);text-align:center;margin-top:18px}
+
+/* ---- 写真拡大 ---- */
+.viewer{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
+.viewer.open{display:flex}
+.viewer img{max-width:100%;max-height:100%;object-fit:contain}
+.viewer button{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;width:48px;height:48px;border-radius:50%;border:0;
+  background:rgba(255,255,255,.18);color:#fff;font-size:26px;cursor:pointer}
+
+/* ---- 読み込み中 ---- */
+.loading{display:flex;flex-direction:column;align-items:center;gap:14px;padding:60px 0;color:var(--sub)}
+.spin{width:36px;height:36px;border-radius:50%;border:4px solid var(--brand-soft);border-top-color:var(--brand);animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.retry{margin-top:6px;border:0;background:var(--brand);color:#fff;border-radius:12px;padding:12px 22px;font-weight:700;cursor:pointer}
+/* ---- 管理者 ---- */
+.top.admin{background:#24323a}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 18px;margin-bottom:14px}
+.form .lead{margin:0 0 16px;color:var(--sub);font-size:15px}
+.ch{font-size:17px;margin:0 0 12px}
+.fld{display:block;margin-bottom:14px}
+.fld>span:first-child{display:block;font-size:14px;font-weight:700;color:#33504c;margin-bottom:6px}
+.fld em{font-style:normal;font-weight:400;color:var(--sub);font-size:12px;margin-left:8px}
+.fld input{width:100%;height:52px;border:1.5px solid #c9d6d3;border-radius:12px;padding:0 14px;font-size:17px;background:#fff;color:var(--ink)}
+.fld input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.pw{position:relative;display:block}
+.pw input{padding-right:72px}
+.eye{position:absolute;right:6px;top:6px;height:40px;border:0;background:#eef3f2;border-radius:9px;padding:0 12px;font-size:14px;font-weight:600;cursor:pointer;color:#33504c}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:54px;border-radius:14px;border:0;font-size:17px;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--brand);color:#fff}
+.btn.primary:disabled{opacity:.6;cursor:wait}
+.btn.ghost{background:#fff;border:1.5px solid #c9d6d3;color:var(--ink);margin-top:6px}
+.msg{border-radius:10px;padding:10px 12px;font-size:14px;margin:0 0 14px}
+.msg.err{background:var(--danger-bg);color:var(--danger-ink);border:1px solid #f3b7b7}
+.msg.info{background:#eef3ff;color:#2b3f7a;border:1px solid #cdd8f7}
+.note{font-size:13px;color:var(--sub);margin:10px 0 0}
+.kv{display:flex;justify-content:space-between;gap:12px;margin:0 0 8px;font-size:15px}
+.kv span{color:var(--sub)}
+.who{font-size:15px;color:var(--sub);margin:2px 4px 12px}
+.who b{color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center}
+.stats b{display:block;font-size:22px;line-height:1.3}
+.stats small{display:block;font-size:12px;color:var(--sub)}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (min-width:600px){.agrid{grid-template-columns:repeat(3,1fr)}}
+.abtn{display:flex;flex-direction:column;gap:2px;min-height:118px;padding:16px;border-radius:var(--radius);background:var(--card);
+  border:1px solid var(--line);box-shadow:var(--shadow);text-decoration:none;cursor:pointer}
+.abtn:active{background:#f8fbfa;transform:scale(.98)}
+.abtn .ai{font-size:28px;line-height:1.2}
+.abtn b{font-size:17px;line-height:1.35;margin-top:4px}
+.abtn small{font-size:12px;color:var(--sub)}
+.abtn.off{opacity:.5;cursor:default;box-shadow:none;background:#f7f9f9}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:#1d2b29;color:#fff;
+  padding:12px 20px;border-radius:16px;font-size:15px;font-weight:600;line-height:1.5;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+/* ---- 段階4：管理画面の部品 ---- */
+.btn.add{margin:2px 0 6px;text-decoration:none}
+.req,.opt{font-style:normal;font-size:11px;font-weight:700;border-radius:6px;padding:1px 7px;margin-left:8px;vertical-align:2px}
+.req{background:#fde3e3;color:var(--danger-ink)}
+.opt{background:#eef2f1;color:var(--sub)}
+.hint{display:block;font-size:13px;color:var(--sub);margin-top:6px;line-height:1.5}
+.fld select{width:100%;height:52px;border:1.5px solid #c9d6d3;border-radius:12px;padding:0 12px;font-size:17px;background:#fff;color:var(--ink)}
+.fld input[type=date]{appearance:none;-webkit-appearance:none}
+.pick{display:flex;flex-wrap:wrap;gap:8px}
+.pk{position:relative;cursor:pointer}
+.pk input{position:absolute;opacity:0;pointer-events:none}
+.pk span{display:flex;align-items:center;min-height:48px;padding:0 16px;border-radius:12px;border:1.5px solid #c9d6d3;background:#fff;font-size:16px;font-weight:600}
+.pk input:checked+span{background:var(--brand);border-color:var(--brand);color:#fff}
+.pk input:checked+span::before{content:'✓';margin-right:6px}
+.pk input:focus-visible+span{box-shadow:0 0 0 3px var(--brand-soft)}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid #c9d6d3;border-radius:12px;overflow:hidden}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0}
+.seg span{display:flex;align-items:center;justify-content:center;height:50px;font-weight:700;background:#fff}
+.seg label+label span{border-left:1.5px solid #c9d6d3}
+.seg input:checked+span{background:var(--brand);color:#fff}
+.seg input[value=退職]:checked+span{background:#6b7c79}
+.switch{display:flex;gap:12px;align-items:flex-start;margin:4px 0 16px;cursor:pointer}
+.switch input{position:absolute;opacity:0}
+.switch .sw{flex:none;width:52px;height:32px;border-radius:999px;background:#c9d6d3;position:relative;transition:.2s;margin-top:2px}
+.switch .sw::after{content:'';position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch input:checked+.sw{background:var(--brand)}
+.switch input:checked+.sw::after{left:23px}
+.switch .lb{font-weight:700;font-size:16px}
+.switch .lb small{display:block;font-weight:400;font-size:13px;color:var(--sub);margin-top:2px;line-height:1.5}
+.savebar{position:sticky;bottom:0;margin:4px -18px -20px;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,255,255,.85),#fff 30%);border-radius:0 0 var(--radius) var(--radius)}
+.idnote{font-size:12px;color:var(--sub);text-align:center;margin:0}
+.msg .linkbtn{display:block;padding:6px 0 0;color:var(--danger-ink);text-decoration:underline}
+details.more{margin-top:22px}
+details.more summary{cursor:pointer;list-style:none;font-size:15px;font-weight:700;color:var(--sub);padding:12px 4px;min-height:44px}
+details.more summary::before{content:'▸ '}
+details.more[open] summary::before{content:'▾ '}
+.list.dim .row{opacity:.65}
+.fchips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.fchip{height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #c9d6d3;background:#fff;font-size:14px;font-weight:600;cursor:pointer}
+.fchip.on{background:#24323a;border-color:#24323a;color:#fff}
+.irow{padding:8px 8px 8px 16px;min-height:68px}
+.irow .tx{text-decoration:none;align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:6px 0}
+.tag{display:inline-block;font-size:12px;background:#eef2f1;color:var(--sub);border-radius:6px;padding:0 8px}
+.tag.fac{background:#fff1dc;color:var(--warn-ink)}
+.tag.warn{background:var(--danger-bg);color:var(--danger-ink);font-weight:700}
+.mv{flex:none;display:flex;gap:4px}
+.mv button{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:#f7faf9;color:#33504c;font-size:14px;cursor:pointer}
+.mv button:disabled{opacity:.3;cursor:default}
+.mv button:not(:disabled):active{background:var(--brand-soft)}
+/* ---- 段階5：育成進捗 ---- */
+.pbar{display:block;height:8px;border-radius:999px;background:#e3ebe9;overflow:hidden;margin:6px 0 4px}
+.pbar i{display:block;height:100%;background:var(--brand-2);border-radius:999px;transition:width .3s}
+.pbar.full i{background:var(--ok)}
+.prow .tx small{margin-top:0}
+.pnum{flex:none;white-space:nowrap;font-size:24px;font-weight:800;color:var(--brand);min-width:56px;text-align:right}
+.pnum small,.pbig small{font-size:13px;font-weight:700;margin-left:1px}
+.psum{padding:16px 18px}
+.pshead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.pname{font-size:19px}
+.pshead>div>small{display:block;color:var(--sub);font-size:14px}
+.pshead .tag{margin-left:8px;vertical-align:3px}
+.pbig{flex:none;white-space:nowrap;font-size:36px;font-weight:800;line-height:1;color:var(--brand)}
+.psum .pbar{height:12px;margin-top:12px}
+.ccount{float:right;font-weight:600;font-size:13px;letter-spacing:0}
+.ptable{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.prog{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 16px;min-height:68px;border-top:1px solid var(--line);transition:background .2s}
+.prog:first-child{border-top:0}
+.prog.is-done{background:#f3faf6}
+.prog.is-saving{opacity:.75}
+.pi{flex:1;min-width:0}
+.pi b{display:block;font-size:16px;line-height:1.45}
+.pmeta{display:block;font-size:12px;color:var(--sub);line-height:1.5;min-height:0}
+.pmeta:empty{display:none}
+.saving{color:var(--brand);font-weight:700}
+.tog{flex:none;display:grid;grid-template-columns:1fr 1fr;border:1.5px solid #c9d6d3;border-radius:12px;overflow:hidden}
+.tog button{width:54px;height:46px;border:0;background:#fff;font-size:17px;font-weight:800;color:#8a9b98;cursor:pointer}
+.tog button+button{border-left:1.5px solid #c9d6d3}
+.tog button[data-v="未"][aria-pressed="true"]{background:#fff4e5;color:var(--warn-ink)}
+.tog button[data-v="済"][aria-pressed="true"]{background:var(--ok);color:#fff}
+.empty .linkbtn{display:inline-block;margin-top:6px;font-size:15px}
+/* ---- 段階6：マニュアル管理 ---- */
+.btn.sub{height:48px;margin:0 0 4px;text-decoration:none;font-size:16px}
+h3.grp{font-size:14px;color:#33504c;margin:14px 4px 8px;font-weight:700}
+.tag.pub{background:#e3f4ea;color:#1d6b45;font-weight:700}
+.tag.draft{background:#fff1dc;color:var(--warn-ink);font-weight:700}
+.restore{flex:none;height:44px;padding:0 16px;border-radius:10px;border:1.5px solid var(--brand);background:#fff;color:var(--brand);font-weight:700;font-size:15px;cursor:pointer}
+.fld textarea{width:100%;border:1.5px solid #c9d6d3;border-radius:12px;padding:10px 14px;font:inherit;font-size:16px;line-height:1.6;background:#fff;color:var(--ink);resize:vertical;min-height:52px}
+.fld textarea:focus,.stepcard textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.stepcard{border:1.5px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px;background:#fbfdfc}
+.stepcard.imp{border-color:var(--warn-line);background:var(--warn-bg)}
+.sthead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.sthead b{font-size:16px}
+.stepcard textarea{width:100%;border:1.5px solid #c9d6d3;border-radius:10px;padding:10px 12px;font:inherit;font-size:16px;line-height:1.6;resize:vertical;background:#fff}
+.stimg{position:relative;margin-top:8px;border-radius:10px;overflow:hidden;background:#eef2f1}
+.stimg img{display:block;width:100%;max-height:260px;object-fit:cover}
+.upl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.7);font-weight:700;color:var(--brand)}
+.stbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.btn.small{width:auto;height:44px;padding:0 14px;font-size:15px;margin:0;cursor:pointer}
+.chk{display:flex;align-items:center;gap:10px;margin-top:10px;min-height:44px;cursor:pointer;font-size:15px}
+.chk input{width:22px;height:22px;accent-color:var(--warn-line)}
+form#mfForm .card{margin-bottom:14px}
+.savebar.two{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin:0 0 16px;padding:12px 0 calc(12px + env(safe-area-inset-bottom));background:linear-gradient(rgba(244,247,246,0),var(--bg) 30%)}
+.savebar.two .btn{margin:0}
+.btn.danger{background:#fff;border:1.5px solid #e9a3a3;color:var(--danger-ink);margin:8px 0 10px}
+.pv{position:fixed;inset:0;z-index:45;background:var(--bg);display:flex;flex-direction:column}
+.pvbar{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#24323a;color:#fff;padding:calc(10px + env(safe-area-inset-top)) 12px 10px 16px}
+.pvbar b{font-size:15px}
+.pvclose{height:44px;padding:0 16px;border:0;border-radius:10px;background:rgba(255,255,255,.18);color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+.pvbody{flex:1;overflow:auto;-webkit-overflow-scrolling:touch}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <button class="back" id="backBtn" hidden aria-label="戻る">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>戻る
+  </button>
+  <div class="ttl"><small id="hSub">ENOSHIMA GUESTHOUSE 134</small><b id="hTitle">清掃マニュアル</b></div>
+  <button class="home" id="homeBtn" hidden aria-label="トップへ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+  </button>
+</header>
+
+<main id="app"><div class="loading"><div class="spin"></div>読み込み中…</div></main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="viewer" id="viewer" role="dialog" aria-label="写真の拡大表示">
+  <img id="viewerImg" alt="">
+  <button id="viewerClose" aria-label="閉じる">×</button>
+</div>
+
+<script>
+/* ============================================================
+   設定：GASを公開したときのURL（…/exec）を '' の中に貼り付ける
+   空欄のままだと「デモ表示（サンプルデータ）」で動きます
+   ============================================================ */
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyw_Wk4bkf7JoEU028ge6TOWdgZiZW523jFQXwk1GKxTY3R64FSbVpySPVDJM5_vbMYaw/exec';
+
+const CACHE_KEY = 'cm_manual_cache_v1';
+const CHECKS_KEY = 'cm_manual_checks_v1';
+const CHECKS_TTL_MS = 12 * 60 * 60 * 1000; // チェック状態は12時間で自動リセット
+
+/* ---------- デモ用データ（GAS_URLが空のときだけ使用） ---------- */
+const DEMO_DATA = {
+  ok: true, generatedAt: '2026-10-26T00:00:00.000Z',
+  facilities: [
+    {id:'FAC-001',name:'本館'},{id:'FAC-002',name:'ANNEX'},{id:'FAC-003',name:'アパートメント'},
+    {id:'FAC-004',name:'Sea Breeze 鎌倉'},{id:'FAC-005',name:'Sea Breeze 三浦'}],
+  places: [
+    {id:'PLC-001',facilityId:'FAC-001',name:'客室（共通）'},{id:'PLC-002',facilityId:'FAC-002',name:'客室（共通）'},
+    {id:'PLC-003',facilityId:'FAC-003',name:'客室（共通）'},{id:'PLC-004',facilityId:'FAC-004',name:'客室（共通）'},
+    {id:'PLC-005',facilityId:'FAC-005',name:'客室（共通）'}],
+  categories: [
+    ['客室清掃','🧹'],['ベッドメイキング','🛏️'],['浴室・シャワー室清掃','🚿'],['トイレ清掃','🚽'],['洗面台清掃','🚰'],['床清掃','🧽'],
+    ['ゴミ回収・分別','🗑️'],['アメニティ・備品補充','🧴'],['共用部清掃','🏠'],['清掃後の最終チェック','✅'],['清掃用具の使用方法','🪣'],['特殊な汚れ・設備への対応','⚠️']
+  ].map(([name,icon],i)=>({id:'CAT-'+String(i+1).padStart(3,'0'),name,icon})),
+  manuals: [
+    {id:'MAN-001',facilityId:'FAC-001',placeId:'PLC-001',categoryId:'CAT-002',title:'【サンプル】ベッドメイキング',
+     purpose:'お客様が気持ちよく眠れるよう、シワのない清潔なベッドに整えます。',
+     tools:['新しいシーツ','新しい枕カバー','掛け布団カバー'],
+     cautions:['使用済みリネンは床に直接置かない','シーツに汚れ・破れがあれば使わずに報告する'],
+     completion:'シーツにシワ・たるみがなく、四隅がしっかり入っている。枕は向きをそろえて配置されている。',
+     finalChecks:['シーツの四隅が入っている','髪の毛が残っていない','枕カバーの口がベッドの内側を向いている','掛け布団が左右均等に掛かっている'],
+     videoId:'',updatedAt:'2026-10-26T00:00:00.000Z',steps:[
+      {no:1,text:'使用済みのシーツ・枕カバー・布団カバーを外し、リネン袋に入れます。忘れ物がないかも確認します。',imageId:'',important:false},
+      {no:2,text:'新しいシーツをマットレスの中央に広げ、左右の垂れ下がりが同じ長さになるように合わせます。',imageId:'',important:false},
+      {no:3,text:'シーツの角をマットレスの下に三角に折り込み、四隅をしっかり入れます。',imageId:'',important:true},
+      {no:4,text:'枕カバーを付け、枕と掛け布団を配置します。',imageId:'',important:false},
+      {no:5,text:'完成状態を確認し、シワがあれば手で伸ばします。',imageId:'',important:false}]},
+    {id:'MAN-002',facilityId:'FAC-001',placeId:'',categoryId:'CAT-004',title:'【サンプル】トイレ清掃',
+     purpose:'便器・床・壁を衛生的な状態に保ち、においの原因を取り除きます。',
+     tools:['トイレ用洗剤','トイレブラシ','トイレ用の雑巾（他の場所と分ける）','ゴム手袋'],
+     cautions:['塩素系と酸性の洗剤は絶対に混ぜない','作業中は換気扇を回す'],
+     completion:'便器のフチ裏まで汚れがなく、床に水滴や髪の毛が残っていない。トイレットペーパーが補充されている。',
+     finalChecks:['フチ裏の汚れ','床の髪の毛・水滴','トイレットペーパーの残量と予備','におい'],
+     videoId:'',updatedAt:'2026-10-26T00:00:00.000Z',steps:[
+      {no:1,text:'換気扇を回し、ゴム手袋を着けます。',imageId:'',important:true},
+      {no:2,text:'便器のフチ裏と内側に洗剤をかけ、ブラシでこすります。',imageId:'',important:false},
+      {no:3,text:'便座・フタ・タンク・床の順に、上から下へ拭きます。',imageId:'',important:false},
+      {no:4,text:'トイレットペーパーを補充し、予備の数を確認します。',imageId:'',important:false}]},
+    {id:'MAN-003',facilityId:'FAC-001',placeId:'PLC-001',categoryId:'CAT-010',title:'【サンプル】清掃後の最終チェック',
+     purpose:'次のお客様を迎えられる状態か、退出前に全体を確認します。',
+     tools:[],cautions:['清掃用具を室内に置き忘れない'],
+     completion:'客室全体が整い、清掃用具・ゴミが残っていない。',
+     finalChecks:['ベッドの仕上がり','床の髪の毛・ホコリ','ゴミ箱が空','アメニティ・備品がそろっている','照明・エアコンを切った','清掃用具を持ち出した'],
+     videoId:'',updatedAt:'2026-10-26T00:00:00.000Z',steps:[
+      {no:1,text:'入口から部屋全体を見渡し、乱れや汚れがないか確認します。',imageId:'',important:false},
+      {no:2,text:'下の「最終チェック項目」を1つずつ確認します。',imageId:'',important:false}]}
+  ]
+};
+
+/* ---------- 状態 ---------- */
+let DATA = null;
+let source = '';        // 'demo' | 'live' | 'cache'
+let fetchState = '';    // 'loading' | 'ok' | 'error'
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+const COMMON = 'common'; // 「施設共通」を表す場所ID
+
+/* ---------- データ取得 ---------- */
+async function load(){
+  if (!GAS_URL){ DATA = DEMO_DATA; source = 'demo'; fetchState = 'ok'; if (!isAdminRoute()) render(); return; }
+  const cached = store.get(CACHE_KEY, null);
+  if (cached && cached.ok){ DATA = cached; source = 'cache'; if (!isAdminRoute()) render(); }
+  fetchState = 'loading'; renderStatus();
+  try{
+    const res = await fetch(GAS_URL + '?action=manual&t=' + Date.now(), {cache:'no-store'});
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'error');
+    const changed = !DATA || JSON.stringify(stripTime(DATA)) !== JSON.stringify(stripTime(json));
+    DATA = json; source = 'live'; fetchState = 'ok';
+    store.set(CACHE_KEY, json);
+    if (changed && !isAdminRoute()) render(); else renderStatus();
+  }catch(e){
+    fetchState = 'error';
+    if (!DATA && !isAdminRoute()) renderError(); else renderStatus();
+  }
+}
+function stripTime(d){ const c = Object.assign({}, d); delete c.generatedAt; return c; }
+
+/* ---------- データ検索ヘルパー ---------- */
+const fac = id => DATA.facilities.find(f => f.id === id);
+const plc = id => DATA.places.find(p => p.id === id);
+const man = id => DATA.manuals.find(m => m.id === id);
+const placeLabel = m => m.placeId ? (plc(m.placeId) || {}).name || '' : '施設共通';
+
+/* ---------- 画面切り替え（URLの#で管理。戻るボタン・ブラウザの戻るに対応） ---------- */
+function route(){
+  const h = location.hash.replace(/^#\/?/, '');
+  const p = h.split('/').filter(Boolean).map(decodeURIComponent);
+  return p;
+}
+function go(path){ location.hash = '#/' + path; }
+
+const isAdminRoute = () => route()[0] === 'admin';
+
+/** 画面を表示する共通処理（ヘッダー・戻るボタン・本文） */
+function showView(view, withStatus){
+  $('#hTitle').textContent = view.title;
+  $('#hSub').textContent = view.sub || 'ENOSHIMA GUESTHOUSE 134';
+  const hasBack = view.back !== undefined; // '' は「トップへ戻る」の意味
+  $('#backBtn').hidden = !hasBack;
+  $('#homeBtn').hidden = !hasBack || view.noHome === true;
+  // 戻る＝常に1つ上の階層へ（URLを直接開いた場合でも迷わない）
+  $('#backBtn').onclick = () => go(view.back === true ? '' : view.back);
+  $('#top').classList.toggle('admin', !!view.admin);
+  document.title = (view.title === '清掃マニュアル' ? '' : view.title + '｜') + '清掃マニュアル';
+  $('#app').innerHTML = banner(view.admin) + (withStatus ? '<div class="status" id="status"></div>' : '') + view.html;
+  if (withStatus) renderStatus();
+  if (view.after) view.after();
+  window.scrollTo(0, 0);
+}
+
+function render(){
+  if (isAdminRoute()) { renderAdmin(); return; }
+  if (!DATA) { showView({ title: '清掃マニュアル', html: '<div class="loading"><div class="spin"></div>読み込み中…</div>' }); return; }
+  const p = route();
+  let view;
+  if (p[0] === 'f' && p[1] && p[2] === 'p' && p[3]) view = viewPlace(p[1], p[3]);
+  else if (p[0] === 'f' && p[1]) view = viewFacility(p[1]);
+  else if (p[0] === 'm' && p[1]) view = viewManual(p[1]);
+  else view = viewHome();
+  showView(view, true);
+}
+
+function banner(isAdmin){
+  if (source === 'demo' || !GAS_URL) return isAdmin
+    ? '<div class="banner demo">デモ表示中です。ログインは ID「demo」／パスワード「demo1234」で試せます（GAS接続後は使えません）。</div>'
+    : '<div class="banner demo">デモ表示中です（サンプルデータ）。GASと接続すると実際のマニュアルが表示されます。</div>';
+  return '';
+}
+function renderStatus(){
+  const el = document.getElementById('status'); if (!el) return;
+  if (source === 'demo') { el.textContent = ''; return; }
+  if (fetchState === 'loading') el.textContent = '最新の内容を確認中…';
+  else if (fetchState === 'error') el.innerHTML = '<span style="color:var(--warn-ink)">通信できないため、前回保存した内容を表示しています</span>';
+  else el.textContent = '最新の内容です';
+}
+function renderError(){
+  showView({ title: '清掃マニュアル', html: '<div class="loading">マニュアルを読み込めませんでした。<br>電波の良い場所で、もう一度お試しください。<button class="retry" onclick="load()">再読み込み</button></div>' });
+}
+
+/* ---------- トップ画面 ---------- */
+function viewHome(){
+  const html = '<h2 class="sec">施設を選ぶ</h2><div class="facs">' +
+    DATA.facilities.map(f => {
+      const n = DATA.manuals.filter(m => m.facilityId === f.id).length;
+      return '<a class="fbtn" href="#/f/' + encodeURIComponent(f.id) + '"><span class="tx"><b>' + esc(f.name) + '</b>' +
+        '<small>マニュアル ' + n + '件</small></span>' + CHEV + '</a>';
+    }).join('') + '</div>';
+
+  return { title: '清掃マニュアル', html };
+}
+
+/* ---------- 施設 → 部屋・場所 ---------- */
+function viewFacility(fid){
+  const f = fac(fid);
+  if (!f) return notFound();
+  const ms = DATA.manuals.filter(m => m.facilityId === fid);
+  const groups = [];
+  const commonN = ms.filter(m => !m.placeId).length;
+  if (commonN) groups.push({ id: COMMON, name: '施設共通', note: 'トイレ・共用部など', n: commonN, icon: '🏠' });
+  DATA.places.filter(p => p.facilityId === fid).forEach(p => {
+    const n = ms.filter(m => m.placeId === p.id).length;
+    groups.push({ id: p.id, name: p.name, n, icon: '🚪' });
+  });
+  const html = '<h2 class="sec">部屋・場所を選ぶ</h2>' + (groups.length
+    ? '<div class="list">' + groups.map(g =>
+        '<a class="row" href="#/f/' + encodeURIComponent(fid) + '/p/' + encodeURIComponent(g.id) + '">' +
+        '<span class="ic">' + g.icon + '</span><span class="tx"><b>' + esc(g.name) + '</b><small>' +
+        (g.n ? 'マニュアル ' + g.n + '件' : 'まだマニュアルがありません') + (g.note ? '・' + esc(g.note) : '') +
+        '</small></span>' + CHEV + '</a>').join('') + '</div>'
+    : '<div class="empty">この施設にはまだ部屋・場所が登録されていません。</div>');
+  return { title: f.name, sub: '部屋・場所を選ぶ', back: '', html };
+}
+
+/* ---------- 部屋・場所 → 作業内容 ---------- */
+function viewPlace(fid, pid){
+  const f = fac(fid);
+  if (!f) return notFound();
+  const name = pid === COMMON ? '施設共通' : (plc(pid) || {}).name;
+  if (!name) return notFound();
+  const ms = DATA.manuals.filter(m => m.facilityId === fid && (pid === COMMON ? !m.placeId : m.placeId === pid));
+  const html = '<h2 class="sec">作業を選ぶ</h2>' + (ms.length
+    ? '<div class="list">' + ms.map(m => manualRow(m)).join('') + '</div>'
+    : '<div class="empty">この場所のマニュアルはまだありません。</div>');
+  return { title: name, sub: f.name, back: 'f/' + encodeURIComponent(fid), html };
+}
+
+function manualRow(m){
+  const sub = m.steps.length + '手順' + (m.videoId ? '・動画あり' : '');
+  return '<a class="row" href="#/m/' + encodeURIComponent(m.id) + '"><span class="ic">📋</span>' +
+    '<span class="tx"><b>' + esc(m.title) + '</b><small>' + esc(sub) + '</small></span>' + CHEV + '</a>';
+}
+
+/* ---------- マニュアル詳細 ---------- */
+function viewManual(mid){
+  const m = man(mid);
+  if (!m) return notFound();
+  const f = fac(m.facilityId) || {};
+
+  let html = '<section class="mhead"><h1>' + esc(m.title) + '</h1><div class="chips">' +
+    '<span class="chip">' + esc(f.name) + '</span><span class="chip">' + esc(placeLabel(m)) + '</span>' +
+    '</div>' +
+    '</section>';
+
+  if (m.cautions.length) html += '<section class="alert" role="note"><h3>⚠️ 重要な注意事項</h3><ul>' +
+    m.cautions.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>';
+
+
+  if (m.videoId) html += '<section class="block"><h3><span class="b">🎬</span>動画で確認</h3>' +
+    '<div class="video"><iframe src="https://drive.google.com/file/d/' + encodeURIComponent(m.videoId) + '/preview" allow="autoplay; fullscreen" allowfullscreen loading="lazy" title="手順の動画"></iframe></div>' +
+    '<div class="video-note">再生されない場合は、通信環境の良い場所でお試しください。</div></section>';
+
+  if (m.steps.length) html += '<section class="block"><h3><span class="b">📋</span>作業手順</h3><ol class="steps">' +
+    m.steps.map((s, i) => '<li class="step' + (s.important ? ' imp' : '') + '"><span class="no">' + (i + 1) + '</span><div class="body">' +
+      (s.important ? '<span class="tag">重要</span>' : '') + '<p>' + esc(s.text).replace(/\n/g, '<br>') + '</p>' +
+      (s.imageId ? '<button class="photo" data-id="' + esc(s.imageId) + '" aria-label="写真を拡大"><img loading="lazy" alt="手順' + (i + 1) + 'の写真" src="' + imgUrl(s.imageId, 1000) + '" onerror="this.parentNode.classList.add(\'broken\')"><div class="err">写真を読み込めません</div></button>' : '') +
+      '</div></li>').join('') + '</ol></section>';
+
+  if (m.completion) html += '<section class="block"><h3><span class="b">✨</span>清掃完了時の正しい状態</h3><div class="done">' + esc(m.completion).replace(/\n/g, '<br>') + '</div></section>';
+
+  if (m.finalChecks.length) html += '<section class="block"><h3><span class="b">✅</span>最終チェック</h3><ul class="checks" id="checks">' +
+    m.finalChecks.map((x, i) => '<li><button data-i="' + i + '"><span class="box">✓</span><span class="t">' + esc(x) + '</span></button></li>').join('') +
+    '</ul><div class="checkmeta"><span id="checkCount"></span><button class="linkbtn" id="checkReset">チェックをリセット</button></div></section>';
+
+  if (m.updatedAt) { const d = new Date(m.updatedAt); if (!isNaN(d)) html += '<div class="updated">最終更新：' + d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + '</div>'; }
+
+  const back = m.placeId ? 'f/' + encodeURIComponent(m.facilityId) + '/p/' + encodeURIComponent(m.placeId) : 'f/' + encodeURIComponent(m.facilityId) + '/p/' + COMMON;
+  return { title: m.title.replace(/^【サンプル】/, ''), sub: (f.name || '') + '・' + placeLabel(m), back, html, after: () => bindManual(m) };
+}
+
+function bindManual(m){
+  document.querySelectorAll('.photo').forEach(b => b.onclick = () => openViewer(b.dataset.id));
+  const box = document.getElementById('checks');
+  if (!box) return;
+  const all = store.get(CHECKS_KEY, {});
+  let st = all[m.id];
+  if (!st || Date.now() - st.t > CHECKS_TTL_MS) st = { t: Date.now(), on: [] };
+  const paint = () => {
+    box.querySelectorAll('button').forEach(b => b.classList.toggle('on', st.on.includes(Number(b.dataset.i))));
+    const n = st.on.length, total = m.finalChecks.length;
+    document.getElementById('checkCount').textContent = n === total ? '✅ すべて確認しました' : n + ' / ' + total + ' 確認済み';
+  };
+  const save = () => { st.t = Date.now(); const a = store.get(CHECKS_KEY, {}); a[m.id] = st; store.set(CHECKS_KEY, a); };
+  box.querySelectorAll('button').forEach(b => b.onclick = () => {
+    const i = Number(b.dataset.i);
+    st.on = st.on.includes(i) ? st.on.filter(x => x !== i) : st.on.concat(i);
+    save(); paint();
+  });
+  document.getElementById('checkReset').onclick = () => { st.on = []; save(); paint(); };
+  paint();
+}
+
+function notFound(){
+  return { title: '見つかりません', back: true, html: '<div class="empty">このページは見つかりませんでした。<br>マニュアルが削除または移動された可能性があります。</div>' };
+}
+
+/* ---------- 写真 ---------- */
+function imgUrl(id, w){ return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w' + w; }
+function openViewer(id){ $('#viewerImg').src = imgUrl(id, 2000); $('#viewer').classList.add('open'); }
+function closeViewer(){ $('#viewer').classList.remove('open'); $('#viewerImg').src = ''; }
+$('#viewerClose').onclick = closeViewer;
+$('#viewer').onclick = e => { if (e.target.id === 'viewer') closeViewer(); };
+
+/* ============================================================
+   管理者（#/admin）
+   ・一般スタッフの画面には入口を表示しない（管理者はこのURLをブックマーク）
+   ・画面を開けても、データはGAS側でトークンを確認してからしか返らない
+   ============================================================ */
+const ADMIN_KEY = 'cm_admin_session_v1';
+let adminSess = store.get(ADMIN_KEY, null);   // { token, name, exp }
+let adminVerified = false;                    // このページを開いてからサーバーで確認済みか
+let adminMsg = '';                            // ログイン画面に1回だけ出すお知らせ
+
+function clearAdmin(){ adminSess = null; adminVerified = false; try{ localStorage.removeItem(ADMIN_KEY); }catch(e){} }
+function saveAdmin(){ store.set(ADMIN_KEY, adminSess); }
+
+async function api(action, payload){
+  if (!GAS_URL) return demoApi(action, payload || {});
+  const res = await fetch(GAS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // 事前確認通信を避けるためtext/plainで送る
+    body: JSON.stringify(Object.assign({ action }, payload || {}))
+  });
+  return res.json();
+}
+
+/** 管理者専用の通信。期限切れなら自動でログイン画面へ */
+async function adminApi(action, payload){
+  const r = await api(action, Object.assign({ token: adminSess && adminSess.token }, payload || {}));
+  if (r && r.error === 'unauthorized'){
+    clearAdmin();
+    adminMsg = 'ログインの有効期限が切れたため、もう一度ログインしてください。';
+    if (isAdminRoute()) renderAdmin();
+    throw new Error('unauthorized');
+  }
+  return r;
+}
+
+/* デモ用（GAS_URLが空のときだけ）。本番ではこの関数は使われない */
+const DEMO_DB = {
+  cats: ['基本ルール・準備', '客室清掃', '水回り清掃', '共用部清掃', '清掃品質・最終確認', '時間管理・効率化', 'トラブル対応・報告'],
+  staff: [
+    { id: 'STF-001', name: '山田 花子', status: '在籍', updatedAt: 1 },
+    { id: 'STF-002', name: '佐藤 一郎', status: '在籍', updatedAt: 1 },
+    { id: 'STF-003', name: '鈴木 次郎', status: '退職', updatedAt: 1 }],
+  items: [['基本ルール・準備','清掃用具の場所'],['基本ルール・準備','ゴミの分別方法'],['客室清掃','ベッドメイキング'],['客室清掃','備品・アメニティの補充'],
+    ['水回り清掃','トイレ清掃'],['水回り清掃','浴室・シャワー室清掃'],['清掃品質・最終確認','清掃後の最終チェック']]
+    .map(([category, name], i) => ({ id: 'ITM-' + String(i + 1).padStart(3, '0'), category, name, facilityId: i < 5 ? 'FAC-001' : 'FAC-002', sort: i + 1, active: true, updatedAt: 1 })),
+  progress: { 'STF-001': { 'ITM-003': '2026-10-20', 'ITM-005': '2026-10-22' } }
+};
+const demoFac = () => DEMO_DATA.facilities.map(f => ({ id: f.id, name: f.name, active: true }));
+function demoApi(action, p){
+  return new Promise(res => setTimeout(() => {
+    if (action === 'login') return res(p.loginId === 'demo' && p.password === 'demo1234'
+      ? { ok: true, token: 'demo-token', admin: { id: 'ADM-000', name: 'デモ管理者' }, expiresAt: Date.now() + 6 * 3600e3 }
+      : { ok: false, error: 'invalid', remaining: 4 });
+    if (p.token !== 'demo-token') return res({ ok: false, error: 'unauthorized' });
+    if (action === 'me') return res({ ok: true, admin: { id: 'ADM-000', name: 'デモ管理者' }, expiresAt: Date.now() + 6 * 3600e3 });
+    if (action === 'adminSummary') return res({ ok: true, counts: { staffActive: 0, trainingItems: 0, manualsPublished: DEMO_DATA.manuals.length, manualsDraft: 0 } });
+    if (action === 'logout') return res({ ok: true });
+    if (action === 'changePassword') return res({ ok: false, error: 'demo' });
+    if (action === 'listStaff') return res({ ok: true, staff: DEMO_DB.staff, facilities: demoFac() });
+    if (action === 'listItems'){
+      const cats = DEMO_DB.cats.slice(); DEMO_DB.items.forEach(i => { if (!cats.includes(i.category)) cats.push(i.category); });
+      return res({ ok: true, items: DEMO_DB.items.slice().sort((a, b) => a.sort - b.sort), categories: cats, facilities: demoFac() });
+    }
+    if (action === 'saveStaff' || action === 'saveItem'){
+      const list = action === 'saveStaff' ? DEMO_DB.staff : DEMO_DB.items, pre = action === 'saveStaff' ? 'STF' : 'ITM';
+      if (!String(p.name || '').trim()) return res({ ok: false, error: 'invalid', message: action === 'saveStaff' ? '氏名を入力してください' : '項目名を入力してください' });
+      let rec = p.id ? list.find(x => x.id === p.id) : null;
+      if (!rec){ rec = { id: pre + '-' + String(list.length + 1).padStart(3, '0'), sort: list.length + 1, active: true }; list.push(rec); }
+      if (action === 'saveStaff') Object.assign(rec, { name: p.name.trim(), status: p.status || '在籍' });
+      else Object.assign(rec, { name: p.name.trim(), category: p.category, facilityId: p.facilityId || '', active: p.id ? p.active !== false : true });
+      rec.updatedAt = Date.now();
+      return res({ ok: true, id: rec.id });
+    }
+    if (action === 'progressOverview'){
+      const act = DEMO_DB.items.filter(i => i.active && i.facilityId);
+      return res({ ok: true, total: act.length, staff: DEMO_DB.staff.filter(x => x.status !== '退職').map(x => ({ id: x.id, name: x.name, total: act.length,
+        done: act.filter(i => (DEMO_DB.progress[x.id] || {})[i.id]).length })) });
+    }
+    if (action === 'staffProgress'){
+      const st = DEMO_DB.staff.find(x => x.id === p.staffId); if (!st) return res({ ok: false, error: 'not_found' });
+      const act = DEMO_DB.items.filter(i => i.active && i.facilityId).sort((a, b) => a.sort - b.sort), mine = DEMO_DB.progress[st.id] || {};
+      const cats = DEMO_DB.cats.slice(); act.forEach(i => { if (!cats.includes(i.category)) cats.push(i.category); });
+      return res({ ok: true, staff: { id: st.id, name: st.name, status: st.status }, categories: cats.filter(c => act.some(i => i.category === c)),
+        facilities: DEMO_DATA.facilities.map(f => ({ id: f.id, name: f.name })),
+        items: act.map(i => ({ id: i.id, name: i.name, category: i.category, facilityId: i.facilityId,
+          status: mine[i.id] ? '済' : '未', doneDate: mine[i.id] || '', by: mine[i.id] ? 'デモ管理者' : '' })) });
+    }
+    if (action === 'setProgress'){
+      const m = DEMO_DB.progress[p.staffId] = DEMO_DB.progress[p.staffId] || {};
+      if (p.status === '済') m[p.itemId] = m[p.itemId] || new Date().toISOString().slice(0, 10); else delete m[p.itemId];
+      return res({ ok: true, status: p.status, doneDate: m[p.itemId] || '', by: 'デモ管理者' });
+    }
+    if (/^(manualAdminList|manualGet|saveManual|deleteManual|restoreManual|reorderManuals|savePlace|uploadImage)$/.test(action)) return res(demoManualApi(action, p));
+    if (action === 'reorderItems'){
+      const sorts = p.ids.map(id => DEMO_DB.items.find(x => x.id === id).sort).sort((a, b) => a - b);
+      p.ids.forEach((id, i) => { DEMO_DB.items.find(x => x.id === id).sort = sorts[i]; });
+      return res({ ok: true });
+    }
+    res({ ok: false, error: 'unknown_action' });
+  }, 350));
+}
+
+async function renderAdmin(){
+  const sub = route()[1] || '';
+  if (!adminSess || Date.now() > adminSess.exp){
+    if (adminSess) adminMsg = 'ログインの有効期限が切れたため、もう一度ログインしてください。';
+    clearAdmin();
+    showView(viewLogin());
+    return;
+  }
+  if (!adminVerified){
+    showView({ title: '管理者メニュー', admin: true, html: '<div class="loading"><div class="spin"></div>ログイン状態を確認中…</div>' });
+    try{
+      const r = await adminApi('me');
+      if (!r.ok) throw new Error(r.error);
+      adminSess.name = r.admin.name; adminSess.exp = r.expiresAt; saveAdmin();
+      adminVerified = true;
+    }catch(e){
+      if (e.message === 'unauthorized') return;
+      showView({ title: '管理者メニュー', admin: true, back: '', html: '<div class="loading">通信できませんでした。<br>電波の良い場所で、もう一度お試しください。<button class="retry" onclick="renderAdmin()">再試行</button></div>' });
+      return;
+    }
+    if (!isAdminRoute()) return; // 確認中に別の画面へ移動した場合
+  }
+  const p = route();
+  if (sub === 'settings') showView(viewSettings());
+  else if (sub === 'staff') await pageStaff(p[2]);
+  else if (sub === 'items') await pageItems(p[2]);
+  else if (sub === 'progress') await pageProgress(p[2], p[3]);
+  else if (sub === 'manuals') await pageManuals(p[2]);
+  else if (sub === 'places') await pagePlaces(p[2], p[3]);
+  else showView(viewAdminHome());
+}
+
+/* ---------- ログイン画面 ---------- */
+function viewLogin(){
+  const msg = adminMsg; adminMsg = '';
+  const html = '<form class="card form" id="loginForm" autocomplete="on" novalidate>' +
+    '<p class="lead">管理者専用ページです。<br>IDとパスワードを入力してください。</p>' +
+    (msg ? '<div class="msg info">' + esc(msg) + '</div>' : '') +
+    '<label class="fld"><span>ログインID</span><input id="lgId" name="username" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email" required></label>' +
+    '<label class="fld"><span>パスワード</span><span class="pw"><input id="lgPw" name="password" type="password" autocomplete="current-password" required>' +
+    '<button type="button" class="eye" id="lgEye">表示</button></span></label>' +
+    '<div class="msg err" id="lgErr" hidden></div>' +
+    '<button class="btn primary" id="lgBtn" type="submit">ログイン</button>' +
+    '</form>';
+  return { title: '管理者ログイン', back: '', noHome: true, admin: true, html, after: bindLogin };
+}
+
+function bindLogin(){
+  const f = $('#loginForm'), btn = $('#lgBtn'), err = $('#lgErr'), pw = $('#lgPw');
+  $('#lgEye').onclick = () => { const show = pw.type === 'password'; pw.type = show ? 'text' : 'password'; $('#lgEye').textContent = show ? '隠す' : '表示'; };
+  setTimeout(() => $('#lgId').focus(), 50);
+  f.onsubmit = async e => {
+    e.preventDefault();
+    const loginId = $('#lgId').value.trim(), password = pw.value;
+    const showErr = t => { err.textContent = t; err.hidden = false; };
+    if (!loginId || !password) return showErr('ログインIDとパスワードを入力してください。');
+    err.hidden = true; btn.disabled = true; btn.textContent = '確認中…';
+    try{
+      const r = await api('login', { loginId, password });
+      if (r.ok){
+        adminSess = { token: r.token, name: r.admin.name, exp: r.expiresAt };
+        adminVerified = true; saveAdmin();
+        toast('ログインしました');
+        renderAdmin();
+        return;
+      }
+      if (r.error === 'locked') showErr('続けて間違えたため、' + (r.minutes || 15) + '分間ログインできません。時間をおいてお試しください。');
+      else if (r.error === 'invalid') showErr('ログインIDまたはパスワードが違います。' + (r.remaining ? '（あと' + r.remaining + '回間違えると一時的にロックされます）' : ''));
+      else showErr('ログインできませんでした。（' + esc(r.error || 'エラー') + '）');
+      pw.value = ''; pw.focus();
+    }catch(e2){
+      showErr('通信できませんでした。電波の良い場所で、もう一度お試しください。');
+    }
+    btn.disabled = false; btn.textContent = 'ログイン';
+  };
+}
+
+/* ---------- 管理者トップ ---------- */
+function viewAdminHome(){
+  const item = (icon, name, note, href) => href
+    ? '<a class="abtn" href="' + href + '"><span class="ai">' + icon + '</span><b>' + name + '</b><small>' + note + '</small></a>'
+    : '<div class="abtn off" aria-disabled="true"><span class="ai">' + icon + '</span><b>' + name + '</b><small>' + note + '</small></div>';
+  const html =
+    '<div class="who">ログイン中：<b>' + esc(adminSess.name) + '</b> さん</div>' +
+    '<div class="stats" id="stats"><div><b>–</b><small>在籍スタッフ</small></div><div><b>–</b><small>教育項目</small></div><div><b>–</b><small>公開マニュアル</small></div></div>' +
+    '<div class="agrid">' +
+      item('📈', '育成進捗管理', 'スタッフごとの未／済', '#/admin/progress') +
+      item('👥', 'スタッフ管理', '登録・名前の変更・退職', '#/admin/staff') +
+      item('📝', '教育項目管理', '追加・並べ替え・無効化', '#/admin/items') +
+      item('🛠️', 'マニュアル管理', '登録・編集・削除', '#/admin/manuals') +
+      item('📖', '清掃マニュアル', 'スタッフと同じ画面', '#/') +
+      item('⚙️', '各種設定', 'パスワード・ログアウト', '#/admin/settings') +
+    '</div>';
+  return { title: '管理者メニュー', admin: true, html, after: loadStats };
+}
+
+async function loadStats(){
+  try{
+    const r = await adminApi('adminSummary');
+    if (!r.ok) return;
+    const el = document.getElementById('stats'); if (!el) return;
+    const c = r.counts, v = [c.staffActive, c.trainingItems, c.manualsPublished];
+    el.querySelectorAll('b').forEach((b, i) => b.textContent = v[i]);
+  }catch(e){}
+}
+
+/* ---------- 各種設定 ---------- */
+function viewSettings(){
+  const exp = new Date(adminSess.exp);
+  const hm = exp.getHours() + ':' + String(exp.getMinutes()).padStart(2, '0');
+  const html =
+    '<section class="card"><h3 class="ch">ログイン情報</h3>' +
+      '<p class="kv"><span>ログイン中</span><b>' + esc(adminSess.name) + ' さん</b></p>' +
+      '<p class="kv"><span>自動ログアウト</span><b>' + hm + ' ごろ</b></p>' +
+      '<button class="btn ghost" id="logoutBtn">ログアウト</button></section>' +
+    '<form class="card form" id="pwForm" novalidate><h3 class="ch">パスワードの変更</h3>' +
+      '<label class="fld"><span>現在のパスワード</span><input id="pwCur" type="password" autocomplete="current-password"></label>' +
+      '<label class="fld"><span>新しいパスワード<em>8文字以上・英字と数字を含む</em></span><input id="pwNew" type="password" autocomplete="new-password"></label>' +
+      '<label class="fld"><span>新しいパスワード（確認）</span><input id="pwNew2" type="password" autocomplete="new-password"></label>' +
+      '<div class="msg err" id="pwErr" hidden></div>' +
+      '<button class="btn primary" id="pwBtn" type="submit">変更する</button>' +
+      '<p class="note">変更すると、ほかの端末でのログインはすべて解除されます。</p></form>';
+  return { title: '各種設定', sub: '管理者メニュー', back: 'admin', noHome: true, admin: true, html, after: bindSettings };
+}
+
+function bindSettings(){
+  $('#logoutBtn').onclick = async () => {
+    $('#logoutBtn').disabled = true; $('#logoutBtn').textContent = 'ログアウト中…';
+    try{ await api('logout', { token: adminSess && adminSess.token }); }catch(e){}
+    clearAdmin(); toast('ログアウトしました'); go('');
+  };
+  const err = $('#pwErr'), btn = $('#pwBtn');
+  const showErr = t => { err.textContent = t; err.hidden = false; };
+  $('#pwForm').onsubmit = async e => {
+    e.preventDefault();
+    const cur = $('#pwCur').value, nw = $('#pwNew').value, nw2 = $('#pwNew2').value;
+    err.hidden = true;
+    if (!cur || !nw) return showErr('すべての欄を入力してください。');
+    if (nw !== nw2) return showErr('新しいパスワード（確認）が一致しません。');
+    if (nw.length < 8 || !/[a-zA-Z]/.test(nw) || !/[0-9]/.test(nw)) return showErr('新しいパスワードは8文字以上で、英字と数字を両方含めてください。');
+    btn.disabled = true; btn.textContent = '変更中…';
+    try{
+      const r = await adminApi('changePassword', { currentPassword: cur, newPassword: nw });
+      if (r.ok){
+        adminSess.token = r.token; adminSess.exp = r.expiresAt; saveAdmin();
+        $('#pwForm').reset(); toast('パスワードを変更しました');
+      } else if (r.error === 'wrong_password') showErr('現在のパスワードが違います。');
+      else if (r.error === 'weak_password') showErr(r.message || '新しいパスワードが条件を満たしていません。');
+      else if (r.error === 'demo') showErr('デモ表示ではパスワードを変更できません。');
+      else showErr('変更できませんでした。（' + esc(r.error || 'エラー') + '）');
+    }catch(e2){
+      if (e2.message !== 'unauthorized') showErr('通信できませんでした。もう一度お試しください。');
+      return;
+    }
+    btn.disabled = false; btn.textContent = '変更する';
+  };
+}
+
+/* ============================================================
+   段階4：スタッフ管理・教育項目管理
+   ============================================================ */
+const reqId = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 12));
+const loadingHtml = t => '<div class="loading"><div class="spin"></div>' + esc(t || '読み込み中…') + '</div>';
+const ERR_TEXT = {
+  conflict: '他の管理者が先にこの内容を更新しました。最新の内容を読み込み直してから、もう一度編集してください。',
+  not_found: 'このデータは見つかりませんでした。一覧に戻って確認してください。',
+};
+
+/** 一覧データを読み込んでから画面を出す共通処理 */
+async function adminLoad(action, frame){
+  const h = location.hash;
+  showView(Object.assign({}, frame, { html: loadingHtml() }));
+  try{
+    const r = await adminApi(action);
+    if (location.hash !== h) return null;          // 読み込み中に画面を移動した
+    if (!r.ok) throw new Error(r.error || 'error');
+    return r;
+  }catch(e){
+    if (e.message === 'unauthorized' || location.hash !== h) return null;
+    showView(Object.assign({}, frame, { html: '<div class="loading">読み込めませんでした。<br>電波の良い場所で、もう一度お試しください。<button class="retry" onclick="renderAdmin()">再試行</button></div>' }));
+    return null;
+  }
+}
+
+/** フォームの保存処理（ボタンの二度押し防止・エラー表示・保存後の移動） */
+async function submitForm(btn, errEl, action, payload, doneHash){
+  const label = btn.textContent;
+  errEl.hidden = true; btn.disabled = true; btn.textContent = '保存中…';
+  try{
+    const r = await adminApi(action, payload);
+    if (r.ok){
+      // 入力欄にカーソルが残ったまま画面を切り替えると、遅れて「変更あり」の合図が届くため、先にカーソルを外す
+      if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+      setDirty(false); toast('保存しました'); go(doneHash); return;
+    }
+    errEl.innerHTML = esc(r.message || ERR_TEXT[r.error] || ('保存できませんでした（' + (r.error || 'エラー') + '）')) +
+      (r.error === 'conflict' ? '<button type="button" class="linkbtn" onclick="setDirty(false);renderAdmin()">最新を読み込む</button>' : '');
+    errEl.hidden = false; errEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }catch(e){
+    if (e.message === 'unauthorized') return;
+    errEl.textContent = '通信できませんでした。入力内容はそのままです。電波の良い場所で、もう一度「保存」を押してください。';
+    errEl.hidden = false;
+  }
+  btn.disabled = false; btn.textContent = label;
+}
+
+/* ---------- 未保存の変更がある場合の警告 ---------- */
+let dirty = false;
+function setDirty(v){ dirty = v; }
+function trackDirty(form){
+  const onEdit = () => { setDirty(true); const e = form.querySelector('.msg.err'); if (e && !e.querySelector('.linkbtn')) e.hidden = true; };
+  form.addEventListener('input', onEdit); form.addEventListener('change', onEdit);
+}
+window.addEventListener('beforeunload', e => { if (dirty || pendingSaves > 0){ e.preventDefault(); e.returnValue = ''; } });
+
+/* ---------- スタッフ管理 ---------- */
+async function pageStaff(id){
+  const frame = id
+    ? { title: id === 'new' ? 'スタッフを追加' : 'スタッフを編集', sub: 'スタッフ管理', back: 'admin/staff', noHome: true, admin: true }
+    : { title: 'スタッフ管理', sub: '管理者メニュー', back: 'admin', noHome: true, admin: true };
+  const r = await adminLoad('listStaff', frame);
+  if (!r) return;
+  if (!id){
+    const row = st => '<a class="row" href="#/admin/staff/' + encodeURIComponent(st.id) + '"><span class="ic">👤</span><span class="tx"><b>' + esc(st.name) + '</b>' +
+      '<small>管理番号 ' + esc(st.id) + '</small></span>' + CHEV + '</a>';
+    const act = r.staff.filter(x => x.status !== '退職'), ret = r.staff.filter(x => x.status === '退職');
+    let html = '<a class="btn primary add" href="#/admin/staff/new">＋ スタッフを追加</a>' +
+      '<h2 class="sec">在籍中（' + act.length + '名）</h2>' +
+      (act.length ? '<div class="list">' + act.map(row).join('') + '</div>' : '<div class="empty">まだスタッフが登録されていません。<br>「＋ スタッフを追加」から登録してください。</div>');
+    if (ret.length) html += '<details class="more"><summary>退職者を表示（' + ret.length + '名）</summary><div class="list dim">' + ret.map(row).join('') + '</div></details>';
+    return showView(Object.assign({}, frame, { html }));
+  }
+  const st = id === 'new' ? { id: '', name: '', status: '在籍', updatedAt: 0 } : r.staff.find(x => x.id === id);
+  if (!st) return showView(Object.assign({}, frame, { html: '<div class="empty">' + ERR_TEXT.not_found + '</div>' }));
+  const html = '<form class="card form" id="stForm" novalidate>' +
+    '<label class="fld"><span>氏名<i class="req">必須</i></span><input id="stName" maxlength="40" value="' + esc(st.name) + '" autocomplete="off" placeholder="例：山田 花子"></label>' +
+    '<p class="hint" style="margin:-4px 0 14px">スタッフは全員、すべての施設を担当します。すべての施設の教育項目が対象になります。</p>' +
+    (st.id ? '<div class="fld"><span>在籍状態</span><div class="seg">' +
+      ['在籍', '退職'].map(v => '<label><input type="radio" name="status" value="' + v + '"' + (st.status === v ? ' checked' : '') + '><span>' + v + '</span></label>').join('') +
+      '</div><small class="hint">退職にしても、これまでの記録は消えません。あとから「在籍」に戻すこともできます。</small></div>' : '') +
+    '<div class="msg err" id="stErr" hidden></div>' +
+    '<div class="savebar"><button class="btn primary" id="stSave" type="submit">' + (st.id ? '変更を保存' : '登録する') + '</button></div>' +
+    '</form>' + (st.id ? '<p class="idnote">管理番号：' + esc(st.id) + '</p>' : '');
+  showView(Object.assign({}, frame, { html, after: () => {
+    const f = $('#stForm'); trackDirty(f);
+    if (!st.id) setTimeout(() => $('#stName').focus(), 50);
+    const rid = reqId();
+    f.onsubmit = e => {
+      e.preventDefault();
+      const name = $('#stName').value.trim();
+      if (!name){ const el = $('#stErr'); el.textContent = '氏名を入力してください。'; el.hidden = false; return; }
+      const statusEl = f.querySelector('input[name=status]:checked');
+      submitForm($('#stSave'), $('#stErr'), 'saveStaff', {
+        id: st.id, name,
+        status: statusEl ? statusEl.value : '在籍', baseUpdatedAt: st.updatedAt, reqId: rid
+      }, 'admin/staff');
+    };
+  }}));
+}
+
+/* ---------- 教育項目管理 ---------- */
+let itemFilter = 'all'; // 'all' | 'none'（施設未設定） | 施設ID
+
+async function pageItems(id){
+  const frame = id
+    ? { title: id === 'new' ? '教育項目を追加' : '教育項目を編集', sub: '教育項目管理', back: 'admin/items', noHome: true, admin: true }
+    : { title: '教育項目管理', sub: '管理者メニュー', back: 'admin', noHome: true, admin: true };
+  const r = await adminLoad('listItems', frame);
+  if (!r) return;
+  const facName = fid => fid ? ((r.facilities.find(f => f.id === fid) || {}).name || '不明な施設') : '施設未設定';
+  if (!id) return showView(Object.assign({}, frame, { html: itemsListHtml(r, facName), after: () => bindItemsList(r, facName) }));
+
+  const it = id === 'new' ? { id: '', name: '', category: r.categories[0] || '', facilityId: itemFilter !== 'all' && itemFilter !== 'none' ? itemFilter : '', active: true, updatedAt: 0 } : r.items.find(x => x.id === id);
+  if (!it) return showView(Object.assign({}, frame, { html: '<div class="empty">' + ERR_TEXT.not_found + '</div>' }));
+  const html = '<form class="card form" id="itForm" novalidate>' +
+    '<label class="fld"><span>項目名<i class="req">必須</i></span><input id="itName" maxlength="60" value="' + esc(it.name) + '" autocomplete="off" placeholder="例：ベッドメイキング"></label>' +
+    '<label class="fld"><span>カテゴリー<i class="req">必須</i></span><select id="itCat">' +
+      r.categories.map(c => '<option' + (c === it.category ? ' selected' : '') + '>' + esc(c) + '</option>').join('') +
+      '<option value="__new">＋ 新しいカテゴリーを作る</option></select></label>' +
+    '<label class="fld" id="itNewWrap" hidden><span>新しいカテゴリー名</span><input id="itNewCat" maxlength="30" placeholder="例：施設ごとの清掃方法"></label>' +
+    '<label class="fld"><span>施設<i class="req">必須</i></span><select id="itFac">' + (it.facilityId ? '' : '<option value="" selected disabled>施設を選んでください</option>') +
+      r.facilities.filter(f => f.active || f.id === it.facilityId).map(f => '<option value="' + esc(f.id) + '"' + (f.id === it.facilityId ? ' selected' : '') + '>' + esc(f.name) + '</option>').join('') +
+    '</select><small class="hint">育成進捗では、この施設を開いたときに表示されます。スタッフ全員が対象です。</small></label>' +
+    (it.id ? '<label class="switch"><input type="checkbox" id="itActive"' + (it.active ? ' checked' : '') + '><span class="sw"></span><span class="lb">この項目を使う' +
+      '<small>オフにすると一覧の下にまとめられ、進捗率の計算から外れます。これまでの記録は残ります。</small></span></label>' : '') +
+    '<div class="msg err" id="itErr" hidden></div>' +
+    '<div class="savebar"><button class="btn primary" id="itSave" type="submit">' + (it.id ? '変更を保存' : '追加する') + '</button></div>' +
+    '</form>' + (it.id ? '<p class="idnote">管理番号：' + esc(it.id) + '</p>' : '');
+  showView(Object.assign({}, frame, { html, after: () => {
+    const f = $('#itForm'); trackDirty(f);
+    const catSel = $('#itCat');
+    catSel.onchange = () => { $('#itNewWrap').hidden = catSel.value !== '__new'; if (catSel.value === '__new') $('#itNewCat').focus(); };
+    if (!it.id) setTimeout(() => $('#itName').focus(), 50);
+    const rid = reqId();
+    f.onsubmit = e => {
+      e.preventDefault();
+      const name = $('#itName').value.trim();
+      const category = catSel.value === '__new' ? $('#itNewCat').value.trim() : catSel.value;
+      const err = $('#itErr');
+      if (!name){ err.textContent = '項目名を入力してください。'; err.hidden = false; return; }
+      if (!category){ err.textContent = '新しいカテゴリー名を入力してください。'; err.hidden = false; return; }
+      if (!$('#itFac').value){ err.textContent = '施設を選んでください。'; err.hidden = false; return; }
+      submitForm($('#itSave'), err, 'saveItem', {
+        id: it.id, name, category, facilityId: $('#itFac').value,
+        active: it.id ? $('#itActive').checked : true, baseUpdatedAt: it.updatedAt, reqId: rid
+      }, 'admin/items');
+    };
+  }}));
+}
+
+function itemsListHtml(r, facName){
+  const inFilter = i => itemFilter === 'all' || (itemFilter === 'none' ? !i.facilityId : i.facilityId === itemFilter);
+  const shown = r.items.filter(inFilter);
+  const unset = r.items.filter(i => i.active && !i.facilityId).length;
+  const act = shown.filter(i => i.active), off = shown.filter(i => !i.active);
+  const chip = (v, label) => '<button type="button" class="fchip' + (itemFilter === v ? ' on' : '') + '" data-f="' + esc(v) + '">' + esc(label) + '</button>';
+  let html = '<a class="btn primary add" href="#/admin/items/new">＋ 教育項目を追加</a>' +
+    '<div class="fchips" role="group" aria-label="施設で絞り込み">' + chip('all', 'すべて') +
+    r.facilities.filter(f => f.active).map(f => chip(f.id, f.name)).join('') + (unset ? chip('none', '施設未設定（' + unset + '）') : '') + '</div>' +
+    (unset ? '<div class="msg info">施設が未設定の項目が' + unset + '件あります。育成進捗には表示されません。項目を開いて施設を選んでください。</div>' : '');
+  const cats = r.categories.filter(c => act.some(i => i.category === c));
+  if (!cats.length) html += '<div class="empty">該当する教育項目はありません。</div>';
+  cats.forEach(c => {
+    const list = act.filter(i => i.category === c);
+    html += '<h2 class="sec">' + esc(c) + '（' + list.length + '）</h2><div class="list">' + list.map((i, n) =>
+      '<div class="row irow"><a class="tx" href="#/admin/items/' + encodeURIComponent(i.id) + '"><b>' + esc(i.name) + '</b>' +
+      '<small><span class="tag' + (i.facilityId ? '' : ' warn') + '">' + esc(facName(i.facilityId)) + '</span></small></a>' +
+      '<span class="mv"><button type="button" aria-label="上へ" data-mv="-1" data-id="' + esc(i.id) + '" data-cat="' + esc(c) + '"' + (n === 0 ? ' disabled' : '') + '>▲</button>' +
+      '<button type="button" aria-label="下へ" data-mv="1" data-id="' + esc(i.id) + '" data-cat="' + esc(c) + '"' + (n === list.length - 1 ? ' disabled' : '') + '>▼</button></span></div>').join('') + '</div>';
+  });
+  if (off.length) html += '<details class="more"><summary>使っていない項目（' + off.length + '）</summary><div class="list dim">' + off.map(i =>
+    '<a class="row" href="#/admin/items/' + encodeURIComponent(i.id) + '"><span class="tx"><b>' + esc(i.name) + '</b><small>' + esc(i.category) + '・' + esc(facName(i.facilityId)) + '</small></span>' + CHEV + '</a>').join('') + '</div></details>';
+  return html;
+}
+
+function bindItemsList(r, facName){
+  const rerender = () => { $('#app').querySelector('.fchips') && ($('#app').innerHTML = banner(true) + itemsListHtml(r, facName)); bindItemsList(r, facName); };
+  document.querySelectorAll('.fchip').forEach(b => b.onclick = () => { itemFilter = b.dataset.f; rerender(); });
+  let busy = false;
+  document.querySelectorAll('.mv button').forEach(b => b.onclick = async () => {
+    if (busy) return;
+    // 並べ替えは「そのカテゴリーの全項目（絞り込みで隠れている項目も含む）」の順番で送る
+    const all = r.items.filter(i => i.active && i.category === b.dataset.cat);
+    const visible = all.filter(i => itemFilter === 'all' || (itemFilter === 'none' ? !i.facilityId : i.facilityId === itemFilter));
+    const pos = visible.findIndex(i => i.id === b.dataset.id), to = pos + Number(b.dataset.mv);
+    if (to < 0 || to >= visible.length) return;
+    const a1 = all.indexOf(visible[pos]), a2 = all.indexOf(visible[to]);
+    const before = r.items.map(i => ({ id: i.id, sort: i.sort }));
+    const s1 = all[a1].sort, s2 = all[a2].sort;
+    [all[a1], all[a2]] = [all[a2], all[a1]];
+    if (s1 === s2){ all.forEach((i, n) => i.sort = (all[0].sort || 1) + n); } else { all[a1].sort = s1; all[a2].sort = s2; }
+    r.items.sort((x, y) => x.sort - y.sort);
+    busy = true; rerender();
+    try{
+      const res = await adminApi('reorderItems', { ids: all.map(i => i.id) });
+      if (!res.ok) throw new Error(res.error);
+    }catch(e){
+      if (e.message === 'unauthorized') return;
+      before.forEach(o => { r.items.find(i => i.id === o.id).sort = o.sort; });
+      r.items.sort((x, y) => x.sort - y.sort); rerender();
+      toast('並べ替えを保存できませんでした');
+    }
+    busy = false;
+  });
+}
+
+/* ============================================================
+   段階5：育成進捗管理（未／済）
+   ============================================================ */
+let progFilter = 'all'; // 'all' | '未' | '済'
+let pendingSaves = 0;   // 保存中の件数（ページを閉じる前の警告に使う）
+const pct = (d, t) => t ? Math.round(d / t * 100) : 0;
+const bar = (d, t) => '<span class="pbar' + (t && d === t ? ' full' : '') + '"><i style="width:' + pct(d, t) + '%"></i></span>';
+
+async function pageProgress(staffId, facilityId){
+  if (!staffId){
+    const frame = { title: '育成進捗管理', sub: '管理者メニュー', back: 'admin', noHome: true, admin: true };
+    const r = await adminLoad('progressOverview', frame);
+    if (!r) return;
+    let html = '<p class="hint" style="margin:0 4px 12px">対象の教育項目：<b>' + r.total + '項目</b>（全施設の合計／全スタッフ共通）</p>';
+    if (!r.staff.length) html += '<div class="empty">在籍中のスタッフがいません。<br><a href="#/admin/staff" class="linkbtn">スタッフ管理で登録する</a></div>';
+    else if (!r.total) html += '<div class="empty">使用中の教育項目がありません。<br><a href="#/admin/items" class="linkbtn">教育項目管理で追加する</a></div>';
+    else html += '<div class="list">' + r.staff.map(st =>
+      '<a class="row prow" href="#/admin/progress/' + encodeURIComponent(st.id) + '"><span class="tx"><b>' + esc(st.name) + '</b>' +
+      bar(st.done, st.total) + '<small>' + (st.done === st.total ? '✅ すべて済' : '済 ' + st.done + ' ／ ' + st.total + '・残り ' + (st.total - st.done) + '項目') + '</small></span>' +
+      '<span class="pnum">' + pct(st.done, st.total) + '<small>%</small></span>' + CHEV + '</a>').join('') + '</div>';
+    return showView(Object.assign({}, frame, { html }));
+  }
+
+  // スタッフ → 施設 → 教育項目。施設を選ぶ前は施設一覧、選んだ後はその施設の項目
+  const frame = facilityId
+    ? { title: '育成進捗', sub: '', back: 'admin/progress/' + encodeURIComponent(staffId), noHome: true, admin: true }
+    : { title: '育成進捗', sub: '育成進捗管理', back: 'admin/progress', noHome: true, admin: true };
+  const h = location.hash;
+  showView(Object.assign({}, frame, { html: loadingHtml() }));
+  let r;
+  try{
+    r = await adminApi('staffProgress', { staffId });
+    if (location.hash !== h) return;
+    if (!r.ok) return showView(Object.assign({}, frame, { html: '<div class="empty">' + (ERR_TEXT[r.error] || '読み込めませんでした。') + '</div>' }));
+  }catch(e){
+    if (e.message === 'unauthorized' || location.hash !== h) return;
+    return showView(Object.assign({}, frame, { html: '<div class="loading">読み込めませんでした。<br>電波の良い場所で、もう一度お試しください。<button class="retry" onclick="renderAdmin()">再試行</button></div>' }));
+  }
+  if (!facilityId){
+    frame.title = r.staff.name;
+    return showView(Object.assign({}, frame, { html: facilityPickHtml(r) }));
+  }
+  const f = r.facilities.find(x => x.id === facilityId);
+  if (!f) return showView(Object.assign({}, frame, { html: '<div class="empty">' + ERR_TEXT.not_found + '</div>' }));
+  // 選んだ施設の項目だけを取り出す（項目オブジェクトは共通なので、切り替えは全体の集計にも反映される）
+  const items = r.items.filter(i => i.facilityId === facilityId);
+  const rf = { staff: r.staff, facility: f, items, categories: r.categories.filter(c => items.some(i => i.category === c)) };
+  frame.title = f.name; frame.sub = r.staff.name + ' さんの育成進捗';
+  showView(Object.assign({}, frame, { html: progressHtml(rf), after: () => bindProgress(rf) }));
+}
+
+/** スタッフを選んだ後の施設一覧（施設ごとの進捗率つき） */
+function facilityPickHtml(r){
+  const done = r.items.filter(i => i.status === '済').length;
+  let html = '<section class="card psum">' + psumHtml(r.staff, done, r.items.length, '全施設の合計') + '</section>' +
+    '<h2 class="sec">施設を選ぶ</h2><div class="facs">';
+  html += r.facilities.map(f => {
+    const list = r.items.filter(i => i.facilityId === f.id), d = list.filter(i => i.status === '済').length;
+    return '<a class="fbtn" href="#/admin/progress/' + encodeURIComponent(r.staff.id) + '/' + encodeURIComponent(f.id) + '"><span class="tx"><b>' + esc(f.name) + '</b>' +
+      (list.length ? bar(d, list.length) + '<small>' + (d === list.length ? '✅ すべて済' : '済 ' + d + ' ／ ' + list.length + '・残り ' + (list.length - d) + '項目') + '</small>'
+                   : '<small>教育項目はまだありません</small>') + '</span>' +
+      (list.length ? '<span class="pnum">' + pct(d, list.length) + '<small>%</small></span>' : '') + CHEV + '</a>';
+  }).join('') + '</div>';
+  return html;
+}
+
+function progressHtml(r){
+  const items = r.items, done = items.filter(i => i.status === '済').length;
+  const chip = (v, label) => '<button type="button" class="fchip' + (progFilter === v ? ' on' : '') + '" data-pf="' + v + '">' + label + '</button>';
+  let html = '<section class="card psum" id="psum">' + psumHtml(r.staff, done, items.length, r.facility && r.facility.name) + '</section>' +
+    '<div class="fchips" role="group" aria-label="表示の絞り込み">' + chip('all', 'すべて') + chip('未', '未だけ') + chip('済', '済だけ') + '</div>';
+  if (!items.length) return html + '<div class="empty">この施設の教育項目はまだありません。<br><a href="#/admin/items" class="linkbtn">教育項目管理で追加する</a></div>';
+  let shown = 0;
+  r.categories.forEach(c => {
+    const all = items.filter(i => i.category === c), list = all.filter(i => progFilter === 'all' || i.status === progFilter);
+    if (!list.length) return;
+    shown += list.length;
+    html += '<h2 class="sec" data-cat="' + esc(c) + '">' + esc(c) + '<span class="ccount">済 ' + all.filter(i => i.status === '済').length + '／' + all.length + '</span></h2>' +
+      '<div class="ptable">' + list.map(progRow).join('') + '</div>';
+  });
+  if (!shown) html += '<div class="empty">' + (progFilter === '未' ? '🎉 未の項目はありません。' : '済の項目はまだありません。') + '</div>';
+  return html;
+}
+
+function psumHtml(st, done, total, label){
+  return '<div class="pshead"><div><b class="pname">' + esc(st.name) + ' さん</b>' + (st.status === '退職' ? '<span class="tag">退職</span>' : '') +
+    '<small>' + (label ? esc(label) + '：' : '') + '済 ' + done + ' ／ ' + total + '項目' + (total - done ? '・残り ' + (total - done) + '項目' : '') + '</small></div>' +
+    '<span class="pbig">' + pct(done, total) + '<small>%</small></span></div>' + bar(done, total);
+}
+
+function progRow(i){
+  return '<div class="prog' + (i.status === '済' ? ' is-done' : '') + '" data-id="' + esc(i.id) + '">' +
+    '<div class="pi"><b>' + esc(i.name) + '</b><small class="pmeta">' + progMeta(i) + '</small></div>' +
+    '<div class="tog" role="group" aria-label="' + esc(i.name) + 'の進捗">' +
+      '<button type="button" data-v="未" aria-pressed="' + (i.status === '未') + '">未</button>' +
+      '<button type="button" data-v="済" aria-pressed="' + (i.status === '済') + '">済</button></div></div>';
+}
+
+function progMeta(i){
+  const parts = [];
+  if (i.saving) parts.push('<span class="saving">保存中…</span>');
+  else if (i.status === '済' && i.doneDate) parts.push('完了 ' + esc(i.doneDate.replace(/^\d{4}-0?(\d+)-0?(\d+)$/, '$1/$2')) + (i.by ? '・' + esc(i.by) : ''));
+  return parts.join(' ');
+}
+
+function bindProgress(r){
+  const app = $('#app');
+  document.querySelectorAll('[data-pf]').forEach(b => b.onclick = () => {
+    progFilter = b.dataset.pf;
+    app.innerHTML = banner(true) + progressHtml(r); bindProgress(r);
+  });
+  const queue = {};       // 項目ごとに保存を1件ずつ順番に送る（連打しても最後の操作が必ず反映される）
+  const inflight = {};    // 項目ごとの保存待ち件数
+  const confirmed = {};   // サーバーで確定した状態（失敗時に戻すため）
+  r.items.forEach(i => { confirmed[i.id] = { status: i.status, doneDate: i.doneDate, by: i.by }; });
+
+  const refreshRow = i => {
+    const el = app.querySelector('.prog[data-id="' + CSS.escape(i.id) + '"]'); if (!el) return;
+    el.classList.toggle('is-done', i.status === '済');
+    el.classList.toggle('is-saving', !!i.saving);
+    el.querySelectorAll('.tog button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === i.status)));
+    el.querySelector('.pmeta').innerHTML = progMeta(i);
+  };
+  const refreshSummary = () => {
+    const done = r.items.filter(i => i.status === '済').length;
+    $('#psum').innerHTML = psumHtml(r.staff, done, r.items.length, r.facility && r.facility.name);
+    app.querySelectorAll('h2.sec[data-cat]').forEach(h2 => {
+      const all = r.items.filter(i => i.category === h2.dataset.cat);
+      h2.querySelector('.ccount').textContent = '済 ' + all.filter(i => i.status === '済').length + '／' + all.length;
+    });
+  };
+
+  app.querySelectorAll('.tog button').forEach(b => b.onclick = () => {
+    const id = b.closest('.prog').dataset.id, v = b.dataset.v;
+    const i = r.items.find(x => x.id === id);
+    if (!i || i.status === v) return;
+    // 画面はすぐに切り替え、裏で保存する
+    i.status = v; i.saving = true;
+    if (v === '未'){ i.doneDate = ''; }
+    refreshRow(i); refreshSummary();
+    pendingSaves++;
+    inflight[id] = (inflight[id] || 0) + 1;
+    queue[id] = (queue[id] || Promise.resolve()).then(async () => {
+      try{
+        const res = await adminApi('setProgress', { staffId: r.staff.id, itemId: id, status: v });
+        if (!res.ok) throw new Error(res.message || res.error);
+        confirmed[id] = { status: res.status, doneDate: res.doneDate, by: res.by };
+      }catch(e){
+        if (e.message === 'unauthorized') return; // ログイン画面に切り替わる
+        toast('「' + i.name + '」を保存できませんでした。もう一度お試しください');
+      }finally{
+        pendingSaves--;
+      }
+      inflight[id]--;
+      if (inflight[id] > 0) return; // 後の操作が控えている場合は、最後の操作の結果で表示を確定する
+      // サーバーで確定した状態を表示（失敗した場合は元に戻る）
+      Object.assign(i, confirmed[id], { saving: false });
+      refreshRow(i); refreshSummary();
+    });
+  });
+}
+
+/* ============================================================
+   段階6：清掃マニュアルの登録・編集・削除
+   ============================================================ */
+let manFilter = '';          // 施設IDで絞り込み（''＝すべて）
+const driveIdOf = v => { const s = String(v || '').trim(); const m = s.match(/\/d\/([a-zA-Z0-9_-]{10,})/) || s.match(/[?&]id=([a-zA-Z0-9_-]{10,})/); return m ? m[1] : (/^[a-zA-Z0-9_-]{10,}$/.test(s) ? s : ''); };
+const linesOf = v => String(v || '').split('\n').map(x => x.trim()).filter(Boolean);
+
+/* ---------- マニュアル一覧（管理） ---------- */
+async function pageManuals(id){
+  if (id) return pageManualEdit(id);
+  const frame = { title: 'マニュアル管理', sub: '管理者メニュー', back: 'admin', noHome: true, admin: true };
+  const r = await adminLoad('manualAdminList', frame);
+  if (!r) return;
+  showView(Object.assign({}, frame, { html: manualListHtml(r), after: () => bindManualList(r) }));
+}
+
+function manualListHtml(r){
+  const live = r.manuals.filter(m => m.status !== '削除済'), dead = r.manuals.filter(m => m.status === '削除済');
+  const chip = (v, label) => '<button type="button" class="fchip' + (manFilter === v ? ' on' : '') + '" data-mf="' + esc(v) + '">' + esc(label) + '</button>';
+  let html = '<a class="btn primary add" href="#/admin/manuals/new">＋ マニュアルを追加</a>' +
+    '<a class="btn ghost sub" href="#/admin/places">🚪 部屋・場所の管理</a>' +
+    '<div class="fchips">' + chip('', 'すべて') + r.facilities.filter(f => f.active).map(f => chip(f.id, f.name)).join('') + '</div>';
+  const facs = r.facilities.filter(f => !manFilter || f.id === manFilter);
+  let any = false;
+  facs.forEach(f => {
+    const mine = live.filter(m => m.facilityId === f.id);
+    if (!mine.length) return;
+    any = true;
+    html += '<h2 class="sec">' + esc(f.name) + '（' + mine.length + '）</h2>';
+    const groups = [{ id: '', name: '施設共通', active: true }].concat(r.places.filter(p => p.facilityId === f.id));
+    groups.forEach(g => {
+      const list = mine.filter(m => m.placeId === g.id);
+      if (!list.length) return;
+      html += '<h3 class="grp">' + esc(g.name) + (g.active ? '' : ' <span class="tag warn">使用停止中・スタッフ画面に表示されません</span>') + '</h3><div class="list">' +
+        list.map((m, n) => {
+          return '<div class="row irow"><a class="tx" href="#/admin/manuals/' + encodeURIComponent(m.id) + '"><b>' + esc(m.title) + '</b><small>' +
+            '<span class="tag ' + (m.status === '公開' ? 'pub' : 'draft') + '">' + esc(m.status) + '</span> ' + m.steps + '手順' + (m.hasVideo ? '・動画' : '') + '</small></a>' +
+            '<span class="mv"><button type="button" aria-label="上へ" data-mmv="-1" data-id="' + esc(m.id) + '"' + (n === 0 ? ' disabled' : '') + '>▲</button>' +
+            '<button type="button" aria-label="下へ" data-mmv="1" data-id="' + esc(m.id) + '"' + (n === list.length - 1 ? ' disabled' : '') + '>▼</button></span></div>';
+        }).join('') + '</div>';
+    });
+  });
+  if (!any) html += '<div class="empty">マニュアルはまだありません。<br>「＋ マニュアルを追加」から登録してください。</div>';
+  if (dead.length) html += '<details class="more"><summary>削除したマニュアル（' + dead.length + '）</summary>' +
+    '<p class="hint" style="margin:0 4px 8px">削除から' + r.restoreDays + '日間はここから復元できます。復元すると「下書き」に戻ります。</p><div class="list dim">' +
+    dead.map(m => {
+      const left = Math.max(0, r.restoreDays - Math.floor((Date.now() - m.deletedAt) / 86400e3));
+      return '<div class="row irow"><span class="tx"><b>' + esc(m.title) + '</b><small>あと' + left + '日で一覧から消えます</small></span>' +
+        '<button type="button" class="restore" data-restore="' + esc(m.id) + '">復元</button></div>';
+    }).join('') + '</div></details>';
+  return html;
+}
+
+function bindManualList(r){
+  const app = $('#app');
+  const rerender = () => { app.innerHTML = banner(true) + manualListHtml(r); bindManualList(r); };
+  app.querySelectorAll('[data-mf]').forEach(b => b.onclick = () => { manFilter = b.dataset.mf; rerender(); });
+  let busy = false;
+  app.querySelectorAll('[data-mmv]').forEach(b => b.onclick = async () => {
+    if (busy) return;
+    const m = r.manuals.find(x => x.id === b.dataset.id);
+    const group = r.manuals.filter(x => x.status !== '削除済' && x.facilityId === m.facilityId && x.placeId === m.placeId);
+    const pos = group.indexOf(m), to = pos + Number(b.dataset.mmv);
+    if (to < 0 || to >= group.length) return;
+    const before = r.manuals.map(x => ({ id: x.id, sort: x.sort }));
+    const s1 = group[pos].sort, s2 = group[to].sort;
+    [group[pos], group[to]] = [group[to], group[pos]];
+    if (s1 === s2) group.forEach((x, n) => x.sort = (group[0].sort || 1) + n); else { group[pos].sort = s1; group[to].sort = s2; }
+    r.manuals.sort((a, b) => a.sort - b.sort);
+    busy = true; rerender();
+    try{
+      const res = await adminApi('reorderManuals', { ids: group.map(x => x.id) });
+      if (!res.ok) throw new Error(res.error);
+      load();
+    }catch(e){
+      if (e.message === 'unauthorized') return;
+      before.forEach(o => { r.manuals.find(x => x.id === o.id).sort = o.sort; });
+      r.manuals.sort((a, b) => a.sort - b.sort); rerender();
+      toast('並べ替えを保存できませんでした');
+    }
+    busy = false;
+  });
+  app.querySelectorAll('[data-restore]').forEach(b => b.onclick = async () => {
+    b.disabled = true; b.textContent = '復元中…';
+    try{
+      const res = await adminApi('restoreManual', { id: b.dataset.restore });
+      if (!res.ok) throw new Error(res.error);
+      toast('下書きとして復元しました。内容を確認してから公開してください');
+      go('admin/manuals/' + encodeURIComponent(b.dataset.restore));
+    }catch(e){
+      if (e.message === 'unauthorized') return;
+      toast('復元できませんでした'); b.disabled = false; b.textContent = '復元';
+    }
+  });
+}
+
+/* ---------- マニュアル編集 ---------- */
+async function pageManualEdit(id){
+  const isNew = id === 'new';
+  const frame = { title: isNew ? 'マニュアルを追加' : 'マニュアルを編集', sub: 'マニュアル管理', back: 'admin/manuals', noHome: true, admin: true };
+  const r = await adminLoad('manualAdminList', frame);
+  if (!r) return;
+  let m;
+  if (isNew){
+    const f0 = manFilter || (r.facilities.find(f => f.active) || {}).id || '';
+    m = { id: '', title: '', facilityId: f0, placeId: '', categoryId: '', purpose: '', tools: [], cautions: [], completion: '', finalChecks: [], video: '', status: '下書き', updatedAt: 0, steps: [] };
+  } else {
+    const h = location.hash;
+    try{
+      const g = await adminApi('manualGet', { id });
+      if (location.hash !== h) return;
+      if (!g.ok) return showView(Object.assign({}, frame, { html: '<div class="empty">' + ERR_TEXT.not_found + '</div>' }));
+      m = g.manual;
+    }catch(e){
+      if (e.message === 'unauthorized' || location.hash !== h) return;
+      return showView(Object.assign({}, frame, { html: '<div class="loading">読み込めませんでした。<button class="retry" onclick="renderAdmin()">再試行</button></div>' }));
+    }
+    if (m.status === '削除済') return showView(Object.assign({}, frame, { html: '<div class="empty">このマニュアルは削除されています。<br>マニュアル管理の「削除したマニュアル」から復元できます。</div>' }));
+  }
+  let key = 0;
+  const ed = Object.assign({}, m, { steps: m.steps.map(st => Object.assign({ key: ++key }, st)) });
+  if (!ed.steps.length) ed.steps.push({ key: ++key, text: '', imageId: '', important: false });
+
+  const opt = (v, label, sel) => '<option value="' + esc(v) + '"' + (sel ? ' selected' : '') + '>' + esc(label) + '</option>';
+  const ta = (id, label, val, hint, rows, extra) => '<label class="fld"><span>' + label + (extra || '') + '</span><textarea id="' + id + '" rows="' + (rows || 3) + '">' + esc(val) + '</textarea>' + (hint ? '<small class="hint">' + hint + '</small>' : '') + '</label>';
+  const html = '<form id="mfForm" novalidate>' +
+    '<section class="card form"><h3 class="ch">基本情報</h3>' +
+      '<label class="fld"><span>タイトル<i class="req">必須</i></span><input id="mfTitle" maxlength="80" value="' + esc(ed.title) + '" placeholder="例：201号室のベッドメイキング"></label>' +
+      '<label class="fld"><span>施設<i class="req">必須</i></span><select id="mfFac">' + r.facilities.filter(f => f.active || f.id === ed.facilityId).map(f => opt(f.id, f.name, f.id === ed.facilityId)).join('') + '</select></label>' +
+      '<label class="fld"><span>部屋・場所</span><select id="mfPlace"></select><small class="hint">部屋が一覧にない場合は「部屋・場所の管理」で追加できます。</small></label>' +
+      '<div class="fld"><span>公開状態</span><div class="seg">' + ['公開', '下書き'].map(v => '<label><input type="radio" name="mfStatus" value="' + v + '"' + (ed.status === v ? ' checked' : '') + '><span>' + v + '</span></label>').join('') +
+        '</div><small class="hint">「下書き」はスタッフ画面に表示されません。作りかけの間は下書きにしておけます。</small></div>' +
+    '</section>' +
+    '<section class="card form"><h3 class="ch">作業の説明</h3>' +
+      ta('mfCautions', '重要な注意事項', ed.cautions.join('\n'), '1行に1つずつ。スタッフ画面では赤枠で目立つように表示されます。', 3) +
+    '</section>' +
+    '<section class="card form"><h3 class="ch">作業手順</h3>' +
+      '<div class="msg info">📷 写真にお客様の顔・私物・書類、宿泊者の情報が写っていないか確認してから追加してください。</div>' +
+      '<div id="mfSteps"></div><button type="button" class="btn ghost" id="mfAddStep">＋ 手順を追加</button></section>' +
+    '<section class="card form"><h3 class="ch">動画（任意）</h3>' +
+      '<label class="fld"><span>Googleドライブの動画リンク</span><input id="mfVideo" inputmode="url" autocomplete="off" value="' + esc(ed.video) + '" placeholder="https://drive.google.com/file/d/…">' +
+      '<small class="hint">動画をドライブの「清掃マニュアル_写真動画」フォルダに入れ、共有リンクをコピーして貼り付けてください。保存時に、閲覧できる設定へ自動で変更します。</small></label>' +
+    '</section>' +
+    '<section class="card form"><h3 class="ch">仕上がりの確認</h3>' +
+      ta('mfCompletion', '清掃完了時の正しい状態', ed.completion, '', 2) +
+      ta('mfChecks', '最終チェック項目', ed.finalChecks.join('\n'), '1行に1つずつ。スタッフ画面ではチェックボックスになります。', 4) +
+    '</section>' +
+    '<div class="msg err" id="mfErr" hidden></div>' +
+    '<div class="savebar two"><button type="button" class="btn ghost" id="mfPreview">プレビュー</button><button type="submit" class="btn primary" id="mfSave">保存する</button></div>' +
+    '</form>' +
+    (ed.id ? '<button type="button" class="btn danger" id="mfDelete">このマニュアルを削除</button><p class="idnote">管理番号：' + esc(ed.id) + '</p>' : '');
+
+  showView(Object.assign({}, frame, { html, after: () => bindManualEdit(r, ed, () => ++key) }));
+}
+
+function bindManualEdit(r, ed, nextKey){
+  const f = $('#mfForm'); trackDirty(f);
+  const facSel = $('#mfFac'), placeSel = $('#mfPlace');
+  const fillPlaces = () => {
+    const opts = r.places.filter(p => p.facilityId === facSel.value && (p.active || p.id === ed.placeId));
+    placeSel.innerHTML = '<option value="">施設共通（トイレ・共用部など）</option>' +
+      opts.map(p => '<option value="' + esc(p.id) + '"' + (p.id === ed.placeId ? ' selected' : '') + '>' + esc(p.name) + (p.active ? '' : '（使用停止中）') + '</option>').join('');
+  };
+  fillPlaces();
+  facSel.onchange = () => { ed.placeId = ''; fillPlaces(); };
+  placeSel.onchange = () => { ed.placeId = placeSel.value; };
+  if (!ed.id) setTimeout(() => $('#mfTitle').focus(), 50);
+
+  /* ---- 手順 ---- */
+  const box = $('#mfSteps');
+  const renderSteps = () => {
+    box.innerHTML = ed.steps.map((st, i) => {
+      const src = st.localUrl || (st.imageId ? imgUrl(st.imageId, 600) : '');
+      return '<div class="stepcard' + (st.important ? ' imp' : '') + '" data-k="' + st.key + '">' +
+        '<div class="sthead"><b>手順 ' + (i + 1) + '</b><span class="mv">' +
+          '<button type="button" data-act="up" aria-label="上へ"' + (i === 0 ? ' disabled' : '') + '>▲</button>' +
+          '<button type="button" data-act="down" aria-label="下へ"' + (i === ed.steps.length - 1 ? ' disabled' : '') + '>▼</button>' +
+          '<button type="button" data-act="del" aria-label="この手順を削除">🗑</button></span></div>' +
+        '<textarea rows="3" data-act="text" placeholder="この手順で行う作業を書いてください">' + esc(st.text) + '</textarea>' +
+        (src ? '<div class="stimg"><img src="' + esc(src) + '" alt="手順' + (i + 1) + 'の写真">' + (st.uploading ? '<span class="upl">アップロード中…</span>' : '') + '</div>' : '') +
+        '<div class="stbtns"><label class="btn ghost small"><input type="file" accept="image/*" data-act="photo" hidden>' + (src ? '📷 写真を変更' : '📷 写真を追加') + '</label>' +
+          (src && !st.uploading ? '<button type="button" class="btn ghost small" data-act="rmphoto">写真を外す</button>' : '') + '</div>' +
+        '<label class="chk"><input type="checkbox" data-act="imp"' + (st.important ? ' checked' : '') + '><span>重要な手順として目立たせる</span></label>' +
+        '</div>';
+    }).join('');
+  };
+  renderSteps();
+  const stepOf = el => ed.steps.find(s => s.key === Number(el.closest('.stepcard').dataset.k));
+  box.addEventListener('input', e => { if (e.target.dataset.act === 'text') stepOf(e.target).text = e.target.value; });
+  box.addEventListener('change', async e => {
+    const act = e.target.dataset.act, st = e.target.closest('.stepcard') && stepOf(e.target);
+    if (act === 'imp'){ st.important = e.target.checked; e.target.closest('.stepcard').classList.toggle('imp', st.important); }
+    if (act === 'photo' && e.target.files[0]) await addPhoto(st, e.target.files[0]);
+  });
+  box.addEventListener('click', e => {
+    const b = e.target.closest('button[data-act]'); if (!b) return;
+    const st = stepOf(b), i = ed.steps.indexOf(st);
+    if (b.dataset.act === 'up' && i > 0) [ed.steps[i - 1], ed.steps[i]] = [ed.steps[i], ed.steps[i - 1]];
+    if (b.dataset.act === 'down' && i < ed.steps.length - 1) [ed.steps[i + 1], ed.steps[i]] = [ed.steps[i], ed.steps[i + 1]];
+    if (b.dataset.act === 'del'){
+      if ((st.text || st.imageId) && !confirm('手順 ' + (i + 1) + ' を削除しますか？')) return;
+      ed.steps.splice(i, 1);
+      if (!ed.steps.length) ed.steps.push({ key: nextKey(), text: '', imageId: '', important: false });
+    }
+    if (b.dataset.act === 'rmphoto'){ st.imageId = ''; st.localUrl = ''; }
+    setDirty(true); renderSteps();
+  });
+  $('#mfAddStep').onclick = () => {
+    ed.steps.push({ key: nextKey(), text: '', imageId: '', important: false });
+    setDirty(true); renderSteps();
+    const last = box.querySelector('.stepcard:last-child textarea'); if (last){ last.focus(); last.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  };
+
+  async function addPhoto(st, file){
+    setDirty(true);
+    let shrunk;
+    try{ shrunk = await shrinkImage(file); }
+    catch(e){ toast('この写真は読み込めませんでした。別の写真をお試しください'); return; }
+    st.localUrl = shrunk.dataUrl; st.uploading = true; renderSteps();
+    try{
+      const res = await adminApi('uploadImage', { data: shrunk.base64, mime: 'image/jpeg', reqId: reqId() });
+      if (!res.ok) throw new Error(res.message || res.error);
+      st.imageId = res.imageId;
+    }catch(e){
+      if (e.message === 'unauthorized') return;
+      st.localUrl = '';
+      toast(e.message === 'demo' ? 'デモ表示では写真をアップロードできません' : '写真をアップロードできませんでした。電波の良い場所でもう一度お試しください');
+    }
+    st.uploading = false; renderSteps();
+  }
+
+  /* ---- フォームの値を集める ---- */
+  const collect = () => ({
+    id: ed.id, title: $('#mfTitle').value.trim(), facilityId: facSel.value, placeId: placeSel.value,
+    // 作業カテゴリーは画面から削除（2026-10）。既存データを消さないよう、読み込んだ値をそのまま送り返す
+    categoryId: ed.categoryId || '',
+    status: (f.querySelector('input[name=mfStatus]:checked') || {}).value || '下書き',
+    // 「作業の目的」「必要な用具」は画面から削除（2026-10）。既存データを消さないよう、読み込んだ値をそのまま送り返す
+    purpose: ed.purpose || '', tools: ed.tools || [], cautions: linesOf($('#mfCautions').value),
+    completion: $('#mfCompletion').value, finalChecks: linesOf($('#mfChecks').value), video: $('#mfVideo').value.trim(),
+    steps: ed.steps.map(st => ({ text: st.text.trim(), imageId: st.imageId || '', important: !!st.important })).filter(st => st.text || st.imageId),
+  });
+
+  // プレビューでは、アップロード直後の写真も確実に見えるよう、端末内の写真を優先して使う
+  $('#mfPreview').onclick = () => showPreview(r, collect(), ed.steps.filter(st => st.text.trim() || st.imageId).map(st => st.localUrl || ''));
+
+  const err = $('#mfErr'), saveBtn = $('#mfSave'), rid = reqId();
+  const showErr = t => { err.textContent = t; err.hidden = false; err.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
+  f.onsubmit = async e => {
+    e.preventDefault();
+    const d = collect();
+    if (ed.steps.some(st => st.uploading)) return showErr('写真のアップロードが終わるまでお待ちください。');
+    if (!d.title) return showErr('タイトルを入力してください。');
+    if (d.video && !driveIdOf(d.video)) return showErr('動画のリンクが正しくありません。Googleドライブの共有リンクを貼り付けてください。');
+    if (d.status === '公開' && !d.steps.length) return showErr('公開するには、手順を1つ以上入力してください（下書きなら保存できます）。');
+    err.hidden = true; saveBtn.disabled = true; saveBtn.textContent = '保存中…';
+    try{
+      const res = await adminApi('saveManual', Object.assign(d, { baseUpdatedAt: ed.updatedAt, reqId: rid }));
+      if (res.ok){
+        if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+        setDirty(false);
+        toast(res.warning === 'video_sharing' ? '保存しました。動画の共有設定を変更できなかったため、ドライブで「リンクを知っている全員」に設定してください' : (d.status === '公開' ? '保存しました（スタッフ画面に公開中）' : '下書きとして保存しました'));
+        load(); go('admin/manuals'); return;
+      }
+      err.innerHTML = esc(res.message || ERR_TEXT[res.error] || ('保存できませんでした（' + (res.error || 'エラー') + '）')) +
+        (res.error === 'conflict' ? '<button type="button" class="linkbtn" onclick="setDirty(false);renderAdmin()">最新を読み込む</button>' : '');
+      err.hidden = false; err.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }catch(e2){
+      if (e2.message === 'unauthorized') return;
+      showErr('通信できませんでした。入力内容はそのままです。電波の良い場所で、もう一度「保存する」を押してください。');
+    }
+    saveBtn.disabled = false; saveBtn.textContent = '保存する';
+  };
+
+  const del = $('#mfDelete');
+  if (del) del.onclick = async () => {
+    if (!confirm('「' + ed.title + '」を削除しますか？\nスタッフ画面から見えなくなります。' + r.restoreDays + '日以内なら復元できます。')) return;
+    del.disabled = true; del.textContent = '削除中…';
+    try{
+      const res = await adminApi('deleteManual', { id: ed.id });
+      if (!res.ok) throw new Error(res.error);
+      setDirty(false); toast('削除しました（' + r.restoreDays + '日以内なら復元できます）'); load(); go('admin/manuals');
+    }catch(e){
+      if (e.message === 'unauthorized') return;
+      toast('削除できませんでした'); del.disabled = false; del.textContent = 'このマニュアルを削除';
+    }
+  };
+}
+
+/** スマホ側で写真を縮小してJPEGにする（長辺1600px）。通信量と表示の速さのため */
+function shrinkImage(file, max = 1600, quality = 0.82){
+  return new Promise((resolve, reject) => {
+    if (!/^image\//.test(file.type || 'image/')) return reject(new Error('not_image'));
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const sc = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.round(img.naturalWidth * sc), h = Math.round(img.naturalHeight * sc);
+      const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, w, h); cx.drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      const dataUrl = cv.toDataURL('image/jpeg', quality);
+      resolve({ dataUrl, base64: dataUrl.split(',')[1] });
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode')); };
+    img.src = url;
+  });
+}
+
+/** スタッフ画面と同じ見た目で確認する（保存前・下書きでも確認できる） */
+function showPreview(r, d, localUrls){
+  const pm = {
+    id: '__preview', facilityId: d.facilityId, placeId: d.placeId, categoryId: d.categoryId, title: d.title || '（タイトル未入力）',
+    purpose: d.purpose.trim(), tools: d.tools, cautions: d.cautions, completion: d.completion.trim(), finalChecks: d.finalChecks,
+    videoId: driveIdOf(d.video), updatedAt: '', steps: d.steps.map((st, i) => ({ no: i + 1, text: st.text, imageId: st.imageId, important: st.important })),
+  };
+  const saved = DATA;
+  DATA = { facilities: r.facilities, places: r.places, categories: r.categories, manuals: [pm] };
+  let view;
+  try{ view = viewManual('__preview'); } finally { DATA = saved; }
+  const ov = document.createElement('div');
+  ov.className = 'pv'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'プレビュー');
+  ov.innerHTML = '<div class="pvbar"><b>プレビュー（スタッフ画面の見え方）</b><button type="button" class="pvclose">閉じる</button></div><div class="pvbody"><main>' + view.html + '</main></div>';
+  document.body.appendChild(ov); document.body.style.overflow = 'hidden';
+  (localUrls || []).forEach((url, i) => {
+    if (!url) return;
+    const img = ov.querySelectorAll('.step')[i] && ov.querySelectorAll('.step')[i].querySelector('.photo img');
+    if (img){ img.src = url; img.parentNode.classList.remove('broken'); img.parentNode.onclick = null; }
+  });
+  ov.querySelectorAll('.photo').forEach(b => { if (!b.onclick) b.onclick = () => openViewer(b.dataset.id); });
+  ov.querySelectorAll('.checks button').forEach(b => b.onclick = () => b.classList.toggle('on'));
+  ov.querySelector('.pvclose').onclick = () => { ov.remove(); document.body.style.overflow = ''; };
+}
+
+/* ---------- 部屋・場所の管理 ---------- */
+async function pagePlaces(id, facId){
+  const frame = id
+    ? { title: id === 'new' ? '部屋・場所を追加' : '部屋・場所を編集', sub: '部屋・場所の管理', back: 'admin/places', noHome: true, admin: true }
+    : { title: '部屋・場所の管理', sub: 'マニュアル管理', back: 'admin/manuals', noHome: true, admin: true };
+  const r = await adminLoad('manualAdminList', frame);
+  if (!r) return;
+  const facs = r.facilities.filter(f => f.active);
+  if (!manFilter || !facs.some(f => f.id === manFilter)) manFilter = (facs[0] || {}).id || '';
+  if (!id){
+    const count = pid => r.manuals.filter(m => m.status !== '削除済' && m.placeId === pid).length;
+    const chip = f => '<button type="button" class="fchip' + (manFilter === f.id ? ' on' : '') + '" data-pf2="' + esc(f.id) + '">' + esc(f.name) + '</button>';
+    const list = r.places.filter(p => p.facilityId === manFilter);
+    const html = '<div class="fchips">' + facs.map(chip).join('') + '</div>' +
+      '<a class="btn primary add" href="#/admin/places/new/' + encodeURIComponent(manFilter) + '">＋ 部屋・場所を追加</a>' +
+      '<p class="hint" style="margin:8px 4px">トイレや共用部など、どの部屋にも当てはまらない作業は「施設共通」として登録できるため、ここに追加する必要はありません。</p>' +
+      (list.length ? '<div class="list">' + list.map(p => '<a class="row" href="#/admin/places/' + encodeURIComponent(p.id) + '"' + (p.active ? '' : ' style="opacity:.6"') + '><span class="ic">🚪</span><span class="tx"><b>' + esc(p.name) + '</b><small>' +
+        (p.active ? 'マニュアル ' + count(p.id) + '件' : '使用停止中・スタッフ画面に表示されません') + '</small></span>' + CHEV + '</a>').join('') + '</div>'
+        : '<div class="empty">この施設には部屋・場所がまだありません。</div>');
+    return showView(Object.assign({}, frame, { html, after: () => {
+      document.querySelectorAll('[data-pf2]').forEach(b => b.onclick = () => { manFilter = b.dataset.pf2; renderAdmin(); });
+    }}));
+  }
+  const pl = id === 'new' ? { id: '', facilityId: facId || manFilter, name: '', active: true } : r.places.find(p => p.id === id);
+  if (!pl) return showView(Object.assign({}, frame, { html: '<div class="empty">' + ERR_TEXT.not_found + '</div>' }));
+  const fname = (r.facilities.find(f => f.id === pl.facilityId) || {}).name || '';
+  const html = '<form class="card form" id="plForm" novalidate>' +
+    '<p class="kv"><span>施設</span><b>' + esc(fname) + '</b></p>' +
+    '<label class="fld"><span>部屋・場所の名前<i class="req">必須</i></span><input id="plName" maxlength="40" value="' + esc(pl.name) + '" placeholder="例：201号室、ドミトリー、2階シャワー室"></label>' +
+    (pl.id ? '<label class="switch"><input type="checkbox" id="plActive"' + (pl.active ? ' checked' : '') + '><span class="sw"></span><span class="lb">この部屋・場所を使う' +
+      '<small>オフにすると、この部屋とそのマニュアルがスタッフ画面に表示されなくなります。マニュアル自体は消えません。</small></span></label>' : '') +
+    '<div class="msg err" id="plErr" hidden></div>' +
+    '<div class="savebar"><button class="btn primary" id="plSave" type="submit">' + (pl.id ? '変更を保存' : '追加する') + '</button></div></form>';
+  showView(Object.assign({}, frame, { html, after: () => {
+    const f = $('#plForm'); trackDirty(f);
+    if (!pl.id) setTimeout(() => $('#plName').focus(), 50);
+    const rid = reqId();
+    f.onsubmit = e => {
+      e.preventDefault();
+      const name = $('#plName').value.trim();
+      if (!name){ const el = $('#plErr'); el.textContent = '名前を入力してください。'; el.hidden = false; return; }
+      manFilter = pl.facilityId;
+      submitForm($('#plSave'), $('#plErr'), 'savePlace', { id: pl.id, facilityId: pl.facilityId, name, active: pl.id ? $('#plActive').checked : true, reqId: rid }, 'admin/places')
+        .then(() => load());
+    };
+  }}));
+}
+
+/* ---------- デモ用：マニュアル管理（GAS_URLが空のときだけ） ---------- */
+function demoManuals(){
+  if (!DEMO_DB.man){
+    DEMO_DB.man = DEMO_DATA.manuals.map((m, i) => Object.assign(JSON.parse(JSON.stringify(m)), { status: '公開', sort: i + 1, deletedAt: 0, video: '', updatedAt: 1 }));
+    DEMO_DB.places = DEMO_DATA.places.map(p => Object.assign({ active: true }, p));
+  }
+  return DEMO_DB.man;
+}
+function demoSync(){
+  const act = new Set(DEMO_DB.places.filter(p => p.active).map(p => p.id));
+  DEMO_DATA.places = DEMO_DB.places.filter(p => p.active).map(p => ({ id: p.id, facilityId: p.facilityId, name: p.name }));
+  DEMO_DATA.manuals = demoManuals().filter(m => m.status === '公開' && (!m.placeId || act.has(m.placeId))).sort((a, b) => a.sort - b.sort)
+    .map(m => Object.assign({}, m, { videoId: driveIdOf(m.video), steps: m.steps.map((s, i) => Object.assign({ no: i + 1 }, s)) }));
+  DATA = DEMO_DATA;
+}
+function demoManualApi(action, p){
+  const list = demoManuals();
+  const facs = DEMO_DATA.facilities.map(f => ({ id: f.id, name: f.name, active: true }));
+  if (action === 'manualAdminList') return { ok: true, facilities: facs, places: DEMO_DB.places.slice(), categories: DEMO_DATA.categories, restoreDays: 30,
+    manuals: list.map(m => ({ id: m.id, title: m.title, facilityId: m.facilityId, placeId: m.placeId, categoryId: m.categoryId, status: m.status, sort: m.sort, steps: m.steps.length, hasVideo: !!m.video, updatedAt: m.updatedAt, deletedAt: m.deletedAt })).sort((a, b) => a.sort - b.sort) };
+  if (action === 'manualGet'){ const m = list.find(x => x.id === p.id); return m ? { ok: true, manual: JSON.parse(JSON.stringify(m)) } : { ok: false, error: 'not_found' }; }
+  if (action === 'uploadImage') return { ok: false, error: 'demo' };
+  if (action === 'saveManual'){
+    let m = p.id ? list.find(x => x.id === p.id) : null;
+    if (!m){ m = { id: 'MAN-' + String(list.length + 1).padStart(3, '0'), sort: list.length + 1, deletedAt: 0 }; list.push(m); }
+    Object.assign(m, { title: p.title, facilityId: p.facilityId, placeId: p.placeId, categoryId: p.categoryId, status: p.status, purpose: p.purpose, tools: p.tools,
+      cautions: p.cautions, completion: p.completion, finalChecks: p.finalChecks, video: p.video, steps: p.steps, updatedAt: Date.now() });
+    demoSync(); return { ok: true, id: m.id };
+  }
+  if (action === 'deleteManual' || action === 'restoreManual'){
+    const m = list.find(x => x.id === p.id); if (!m) return { ok: false, error: 'not_found' };
+    if (action === 'deleteManual'){ m.status = '削除済'; m.deletedAt = Date.now(); } else { m.status = '下書き'; m.deletedAt = 0; }
+    demoSync(); return { ok: true };
+  }
+  if (action === 'reorderManuals'){
+    const sorts = p.ids.map(id => list.find(x => x.id === id).sort).sort((a, b) => a - b);
+    p.ids.forEach((id, i) => { list.find(x => x.id === id).sort = sorts[i]; });
+    demoSync(); return { ok: true };
+  }
+  if (action === 'savePlace'){
+    let pl = p.id ? DEMO_DB.places.find(x => x.id === p.id) : null;
+    if (!pl){ pl = { id: 'PLC-' + String(DEMO_DB.places.length + 1).padStart(3, '0'), facilityId: p.facilityId }; DEMO_DB.places.push(pl); }
+    Object.assign(pl, { name: p.name, active: p.active !== false });
+    demoSync(); return { ok: true, id: pl.id };
+  }
+  return { ok: false, error: 'unknown_action' };
+}
+
+/* ---------- お知らせ（画面下に数秒表示） ---------- */
+let toastTimer = null;
+function toast(t){
+  const el = $('#toast'); el.textContent = t; el.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+/* ---------- 起動 ---------- */
+$('#homeBtn').onclick = () => go('');
+// 画面移動。入力途中の内容があれば確認してから移動する
+let lastHash = location.hash, revertingHash = false;
+window.addEventListener('hashchange', () => {
+  if (revertingHash){ revertingHash = false; return; }
+  if (dirty && !confirm('保存していない入力内容があります。\n入力内容を破棄して移動しますか？')){
+    revertingHash = true; location.hash = lastHash; return;
+  }
+  setDirty(false); lastHash = location.hash; render();
+});
+// アプリに戻ってきたとき（別アプリから切り替え）に最新を確認
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && GAS_URL) load(); });
+if (isAdminRoute()) render();
+load();
+</script>
+</body>
+</html>
