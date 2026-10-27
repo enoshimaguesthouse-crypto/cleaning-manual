@@ -282,6 +282,27 @@ form#mfForm .card{margin-bottom:14px}
 .pvbar b{font-size:15px}
 .pvclose{height:44px;padding:0 16px;border:0;border-radius:10px;background:rgba(255,255,255,.18);color:#fff;font-weight:700;font-size:15px;cursor:pointer}
 .pvbody{flex:1;overflow:auto;-webkit-overflow-scrolling:touch}
+/* ---- 2026-10-27：教育項目の削除・施設の切り替え ---- */
+.mv button.del{color:var(--danger-ink);background:var(--danger-bg);border-color:#f3b7b7;display:flex;align-items:center;justify-content:center}
+.mv button.del:not(:disabled):active{background:#f9d5d5}
+.mv button.del.busy{opacity:.5}
+.list.dim .row.irow{opacity:1}
+.list.dim .row.irow .tx{opacity:.65}
+.cdlg{position:fixed;inset:0;z-index:70;background:rgba(16,30,28,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.cdbox{width:100%;max-width:400px;background:#fff;border-radius:18px;padding:22px 20px 18px;box-shadow:0 10px 40px rgba(0,0,0,.25);text-align:center}
+.cdicon{width:52px;height:52px;margin:0 auto 10px;border-radius:50%;background:var(--danger-bg);color:var(--danger-ink);display:flex;align-items:center;justify-content:center}
+.cdicon svg{width:26px;height:26px}
+.cdbox h3{margin:0 0 10px;font-size:18px}
+.cdname{margin:0 0 10px;padding:10px 12px;background:#f4f7f6;border-radius:12px;font-weight:700;font-size:17px;line-height:1.5;word-break:break-word}
+.cdname small{display:block;font-weight:400;font-size:13px;color:var(--sub)}
+.cdmsg{margin:0 0 16px;font-size:14px;color:#5b3a3a;line-height:1.6;text-align:left}
+.cdbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cdbtns .btn{margin:0;height:50px}
+.btn.danger-solid{background:#d64545;color:#fff;border:0}
+.btn.danger-solid:active{background:#b83636}
+.fswitch{margin:0 0 4px}
+.fswitch .fchip{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.fswitch .fchip.on{background:var(--brand);border-color:var(--brand);color:#fff}
 </style>
 </head>
 <body>
@@ -376,7 +397,6 @@ const store = {
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
 const CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
-const COMMON = 'common'; // 「施設共通」を表す場所ID
 
 /* ---------- データ取得 ---------- */
 async function load(){
@@ -401,9 +421,7 @@ function stripTime(d){ const c = Object.assign({}, d); delete c.generatedAt; ret
 
 /* ---------- データ検索ヘルパー ---------- */
 const fac = id => DATA.facilities.find(f => f.id === id);
-const plc = id => DATA.places.find(p => p.id === id);
 const man = id => DATA.manuals.find(m => m.id === id);
-const placeLabel = m => m.placeId ? (plc(m.placeId) || {}).name || '' : '施設共通';
 
 /* ---------- 画面切り替え（URLの#で管理。戻るボタン・ブラウザの戻るに対応） ---------- */
 function route(){
@@ -437,8 +455,7 @@ function render(){
   if (!DATA) { showView({ title: '清掃マニュアル', html: '<div class="loading"><div class="spin"></div>読み込み中…</div>' }); return; }
   const p = route();
   let view;
-  if (p[0] === 'f' && p[1] && p[2] === 'p' && p[3]) view = viewPlace(p[1], p[3]);
-  else if (p[0] === 'f' && p[1]) view = viewFacility(p[1]);
+  if (p[0] === 'f' && p[1]) view = viewFacility(p[1]); // 以前の「#/f/施設/p/部屋」のURLも、施設の作業一覧で開く
   else if (p[0] === 'm' && p[1]) view = viewManual(p[1]);
   else view = viewHome();
   showView(view, true);
@@ -473,39 +490,17 @@ function viewHome(){
   return { title: '清掃マニュアル', html };
 }
 
-/* ---------- 施設 → 部屋・場所 ---------- */
+/* ---------- 施設 → 作業一覧（2026-10-27：部屋・場所の選択をなくし2段階に） ---------- */
 function viewFacility(fid){
   const f = fac(fid);
   if (!f) return notFound();
-  const ms = DATA.manuals.filter(m => m.facilityId === fid);
-  const groups = [];
-  const commonN = ms.filter(m => !m.placeId).length;
-  if (commonN) groups.push({ id: COMMON, name: '施設共通', note: 'トイレ・共用部など', n: commonN, icon: '🏠' });
-  DATA.places.filter(p => p.facilityId === fid).forEach(p => {
-    const n = ms.filter(m => m.placeId === p.id).length;
-    groups.push({ id: p.id, name: p.name, n, icon: '🚪' });
-  });
-  const html = '<h2 class="sec">部屋・場所を選ぶ</h2>' + (groups.length
-    ? '<div class="list">' + groups.map(g =>
-        '<a class="row" href="#/f/' + encodeURIComponent(fid) + '/p/' + encodeURIComponent(g.id) + '">' +
-        '<span class="ic">' + g.icon + '</span><span class="tx"><b>' + esc(g.name) + '</b><small>' +
-        (g.n ? 'マニュアル ' + g.n + '件' : 'まだマニュアルがありません') + (g.note ? '・' + esc(g.note) : '') +
-        '</small></span>' + CHEV + '</a>').join('') + '</div>'
-    : '<div class="empty">この施設にはまだ部屋・場所が登録されていません。</div>');
-  return { title: f.name, sub: '部屋・場所を選ぶ', back: '', html };
-}
-
-/* ---------- 部屋・場所 → 作業内容 ---------- */
-function viewPlace(fid, pid){
-  const f = fac(fid);
-  if (!f) return notFound();
-  const name = pid === COMMON ? '施設共通' : (plc(pid) || {}).name;
-  if (!name) return notFound();
-  const ms = DATA.manuals.filter(m => m.facilityId === fid && (pid === COMMON ? !m.placeId : m.placeId === pid));
-  const html = '<h2 class="sec">作業を選ぶ</h2>' + (ms.length
+  const ms = DATA.manuals.filter(m => m.facilityId === fid); // 施設共通のマニュアルも含む
+  const sw = '<nav class="fchips fswitch" aria-label="施設を切り替え">' + DATA.facilities.map(x =>
+    '<a class="fchip' + (x.id === fid ? ' on' : '') + '" href="#/f/' + encodeURIComponent(x.id) + '"' + (x.id === fid ? ' aria-current="page"' : '') + '>' + esc(x.name) + '</a>').join('') + '</nav>';
+  const html = sw + '<h2 class="sec">作業を選ぶ（' + ms.length + '件）</h2>' + (ms.length
     ? '<div class="list">' + ms.map(m => manualRow(m)).join('') + '</div>'
-    : '<div class="empty">この場所のマニュアルはまだありません。</div>');
-  return { title: name, sub: f.name, back: 'f/' + encodeURIComponent(fid), html };
+    : '<div class="empty">この施設のマニュアルはまだありません。</div>');
+  return { title: f.name, sub: '作業を選ぶ', back: '', html };
 }
 
 function manualRow(m){
@@ -521,7 +516,7 @@ function viewManual(mid){
   const f = fac(m.facilityId) || {};
 
   let html = '<section class="mhead"><h1>' + esc(m.title) + '</h1><div class="chips">' +
-    '<span class="chip">' + esc(f.name) + '</span><span class="chip">' + esc(placeLabel(m)) + '</span>' +
+    '<span class="chip">' + esc(f.name) + '</span>' +
     '</div>' +
     '</section>';
 
@@ -547,8 +542,7 @@ function viewManual(mid){
 
   if (m.updatedAt) { const d = new Date(m.updatedAt); if (!isNaN(d)) html += '<div class="updated">最終更新：' + d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + '</div>'; }
 
-  const back = m.placeId ? 'f/' + encodeURIComponent(m.facilityId) + '/p/' + encodeURIComponent(m.placeId) : 'f/' + encodeURIComponent(m.facilityId) + '/p/' + COMMON;
-  return { title: m.title.replace(/^【サンプル】/, ''), sub: (f.name || '') + '・' + placeLabel(m), back, html, after: () => bindManual(m) };
+  return { title: m.title.replace(/^【サンプル】/, ''), sub: f.name || '', back: 'f/' + encodeURIComponent(m.facilityId), html, after: () => bindManual(m) };
 }
 
 function bindManual(m){
@@ -676,7 +670,13 @@ function demoApi(action, p){
       if (p.status === '済') m[p.itemId] = m[p.itemId] || new Date().toISOString().slice(0, 10); else delete m[p.itemId];
       return res({ ok: true, status: p.status, doneDate: m[p.itemId] || '', by: 'デモ管理者' });
     }
-    if (/^(manualAdminList|manualGet|saveManual|deleteManual|restoreManual|reorderManuals|savePlace|uploadImage)$/.test(action)) return res(demoManualApi(action, p));
+    if (/^(manualAdminList|manualGet|saveManual|deleteManual|restoreManual|reorderManuals|uploadImage)$/.test(action)) return res(demoManualApi(action, p));
+    if (action === 'deleteItem'){
+      const before = DEMO_DB.items.length;
+      DEMO_DB.items = DEMO_DB.items.filter(i => i.id !== p.id);
+      Object.keys(DEMO_DB.progress).forEach(sid => { delete DEMO_DB.progress[sid][p.id]; });
+      return res(DEMO_DB.items.length < before ? { ok: true, id: p.id } : { ok: false, error: 'not_found' });
+    }
     if (action === 'reorderItems'){
       const sorts = p.ids.map(id => DEMO_DB.items.find(x => x.id === id).sort).sort((a, b) => a - b);
       p.ids.forEach((id, i) => { DEMO_DB.items.find(x => x.id === id).sort = sorts[i]; });
@@ -714,7 +714,7 @@ async function renderAdmin(){
   else if (sub === 'items') await pageItems(p[2]);
   else if (sub === 'progress') await pageProgress(p[2], p[3]);
   else if (sub === 'manuals') await pageManuals(p[2]);
-  else if (sub === 'places') await pagePlaces(p[2], p[3]);
+  else if (sub === 'places') go('admin/manuals'); // 部屋・場所の管理は2026-10-27に廃止
   else showView(viewAdminHome());
 }
 
@@ -996,6 +996,9 @@ async function pageItems(id){
   }}));
 }
 
+const TRASH_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/><path d="M10 11v6M14 11v6"/></svg>';
+const delBtn = i => '<button type="button" class="del" data-del="' + esc(i.id) + '" aria-label="「' + esc(i.name) + '」を削除" title="削除">' + TRASH_ICON + '</button>';
+
 function itemsListHtml(r, facName){
   const inFilter = i => itemFilter === 'all' || (itemFilter === 'none' ? !i.facilityId : i.facilityId === itemFilter);
   const shown = r.items.filter(inFilter);
@@ -1014,10 +1017,11 @@ function itemsListHtml(r, facName){
       '<div class="row irow"><a class="tx" href="#/admin/items/' + encodeURIComponent(i.id) + '"><b>' + esc(i.name) + '</b>' +
       '<small><span class="tag' + (i.facilityId ? '' : ' warn') + '">' + esc(facName(i.facilityId)) + '</span></small></a>' +
       '<span class="mv"><button type="button" aria-label="上へ" data-mv="-1" data-id="' + esc(i.id) + '" data-cat="' + esc(c) + '"' + (n === 0 ? ' disabled' : '') + '>▲</button>' +
-      '<button type="button" aria-label="下へ" data-mv="1" data-id="' + esc(i.id) + '" data-cat="' + esc(c) + '"' + (n === list.length - 1 ? ' disabled' : '') + '>▼</button></span></div>').join('') + '</div>';
+      '<button type="button" aria-label="下へ" data-mv="1" data-id="' + esc(i.id) + '" data-cat="' + esc(c) + '"' + (n === list.length - 1 ? ' disabled' : '') + '>▼</button>' + delBtn(i) + '</span></div>').join('') + '</div>';
   });
   if (off.length) html += '<details class="more"><summary>使っていない項目（' + off.length + '）</summary><div class="list dim">' + off.map(i =>
-    '<a class="row" href="#/admin/items/' + encodeURIComponent(i.id) + '"><span class="tx"><b>' + esc(i.name) + '</b><small>' + esc(i.category) + '・' + esc(facName(i.facilityId)) + '</small></span>' + CHEV + '</a>').join('') + '</div></details>';
+    '<div class="row irow"><a class="tx" href="#/admin/items/' + encodeURIComponent(i.id) + '"><b>' + esc(i.name) + '</b><small>' + esc(i.category) + '・' + esc(facName(i.facilityId)) + '</small></a>' +
+    '<span class="mv">' + delBtn(i) + '</span></div>').join('') + '</div></details>';
   return html;
 }
 
@@ -1025,7 +1029,7 @@ function bindItemsList(r, facName){
   const rerender = () => { $('#app').querySelector('.fchips') && ($('#app').innerHTML = banner(true) + itemsListHtml(r, facName)); bindItemsList(r, facName); };
   document.querySelectorAll('.fchip').forEach(b => b.onclick = () => { itemFilter = b.dataset.f; rerender(); });
   let busy = false;
-  document.querySelectorAll('.mv button').forEach(b => b.onclick = async () => {
+  document.querySelectorAll('.mv button[data-mv]').forEach(b => b.onclick = async () => {
     if (busy) return;
     // 並べ替えは「そのカテゴリーの全項目（絞り込みで隠れている項目も含む）」の順番で送る
     const all = r.items.filter(i => i.active && i.category === b.dataset.cat);
@@ -1049,6 +1053,59 @@ function bindItemsList(r, facName){
       toast('並べ替えを保存できませんでした');
     }
     busy = false;
+  });
+  // ---- 削除（2026-10-27追加）：確認してから、教育項目IDで削除する ----
+  document.querySelectorAll('.mv button[data-del]').forEach(b => b.onclick = async () => {
+    if (busy) return;
+    const it = r.items.find(i => i.id === b.dataset.del);
+    if (!it) return;
+    const yes = await confirmDialog({
+      title: 'この教育項目を削除しますか？',
+      name: it.name,
+      sub: it.category + '・' + facName(it.facilityId),
+      message: 'この項目の進捗記録（全スタッフの未／済）もあわせて削除されます。削除すると元に戻せません。',
+      okLabel: '削除',
+    });
+    if (!yes) return;
+    busy = true;
+    b.disabled = true; b.classList.add('busy');
+    try{
+      const res = await adminApi('deleteItem', { id: it.id });
+      if (!res.ok && res.error !== 'not_found') throw new Error(res.error);
+      // not_found＝すでに他の端末で削除済み。どちらの場合も一覧から外す
+      r.items = r.items.filter(i => i.id !== it.id);
+      busy = false; rerender();
+      toast('「' + it.name + '」を削除しました');
+    }catch(e){
+      busy = false;
+      if (e.message === 'unauthorized') return;
+      b.disabled = false; b.classList.remove('busy');
+      toast('削除できませんでした。電波の良い場所でもう一度お試しください');
+    }
+  });
+}
+
+/**
+ * 確認ダイアログ（「キャンセル」と、赤い実行ボタン）。押されたボタンに応じて true / false を返す。
+ * 初期の選択は「キャンセル」。背景のタップやEscキーでもキャンセル。
+ */
+function confirmDialog({ title, name, sub, message, okLabel }){
+  return new Promise(resolve => {
+    const prevFocus = document.activeElement;
+    const ov = document.createElement('div');
+    ov.className = 'cdlg';
+    ov.innerHTML = '<div class="cdbox" role="alertdialog" aria-modal="true" aria-labelledby="cdT" aria-describedby="cdM">' +
+      '<div class="cdicon" aria-hidden="true">' + TRASH_ICON + '</div>' +
+      '<h3 id="cdT">' + esc(title) + '</h3>' +
+      (name ? '<p class="cdname">' + esc(name) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</p>' : '') +
+      (message ? '<p class="cdmsg" id="cdM">' + esc(message) + '</p>' : '') +
+      '<div class="cdbtns"><button type="button" class="btn ghost" data-r="0">キャンセル</button><button type="button" class="btn danger-solid" data-r="1">' + esc(okLabel || 'OK') + '</button></div></div>';
+    const done = v => { document.removeEventListener('keydown', onKey, true); ov.remove(); document.body.style.overflow = ''; if (prevFocus && prevFocus.focus) prevFocus.focus(); resolve(v); };
+    const onKey = e => { if (e.key === 'Escape'){ e.preventDefault(); done(false); } };
+    ov.addEventListener('click', e => { if (e.target === ov) done(false); const b = e.target.closest('button[data-r]'); if (b) done(b.dataset.r === '1'); });
+    document.addEventListener('keydown', onKey, true);
+    document.body.appendChild(ov); document.body.style.overflow = 'hidden';
+    ov.querySelector('button[data-r="0"]').focus();
   });
 }
 
@@ -1234,7 +1291,6 @@ function manualListHtml(r){
   const live = r.manuals.filter(m => m.status !== '削除済'), dead = r.manuals.filter(m => m.status === '削除済');
   const chip = (v, label) => '<button type="button" class="fchip' + (manFilter === v ? ' on' : '') + '" data-mf="' + esc(v) + '">' + esc(label) + '</button>';
   let html = '<a class="btn primary add" href="#/admin/manuals/new">＋ マニュアルを追加</a>' +
-    '<a class="btn ghost sub" href="#/admin/places">🚪 部屋・場所の管理</a>' +
     '<div class="fchips">' + chip('', 'すべて') + r.facilities.filter(f => f.active).map(f => chip(f.id, f.name)).join('') + '</div>';
   const facs = r.facilities.filter(f => !manFilter || f.id === manFilter);
   let any = false;
@@ -1242,19 +1298,14 @@ function manualListHtml(r){
     const mine = live.filter(m => m.facilityId === f.id);
     if (!mine.length) return;
     any = true;
-    html += '<h2 class="sec">' + esc(f.name) + '（' + mine.length + '）</h2>';
-    const groups = [{ id: '', name: '施設共通', active: true }].concat(r.places.filter(p => p.facilityId === f.id));
-    groups.forEach(g => {
-      const list = mine.filter(m => m.placeId === g.id);
-      if (!list.length) return;
-      html += '<h3 class="grp">' + esc(g.name) + (g.active ? '' : ' <span class="tag warn">使用停止中・スタッフ画面に表示されません</span>') + '</h3><div class="list">' +
-        list.map((m, n) => {
-          return '<div class="row irow"><a class="tx" href="#/admin/manuals/' + encodeURIComponent(m.id) + '"><b>' + esc(m.title) + '</b><small>' +
-            '<span class="tag ' + (m.status === '公開' ? 'pub' : 'draft') + '">' + esc(m.status) + '</span> ' + m.steps + '手順' + (m.hasVideo ? '・動画' : '') + '</small></a>' +
-            '<span class="mv"><button type="button" aria-label="上へ" data-mmv="-1" data-id="' + esc(m.id) + '"' + (n === 0 ? ' disabled' : '') + '>▲</button>' +
-            '<button type="button" aria-label="下へ" data-mmv="1" data-id="' + esc(m.id) + '"' + (n === list.length - 1 ? ' disabled' : '') + '>▼</button></span></div>';
-        }).join('') + '</div>';
-    });
+    // 2026-10-27：部屋・場所での分類をやめ、施設ごとの作業一覧にする
+    html += '<h2 class="sec">' + esc(f.name) + '（' + mine.length + '）</h2><div class="list">' +
+      mine.map((m, n) => {
+        return '<div class="row irow"><a class="tx" href="#/admin/manuals/' + encodeURIComponent(m.id) + '"><b>' + esc(m.title) + '</b><small>' +
+          '<span class="tag ' + (m.status === '公開' ? 'pub' : 'draft') + '">' + esc(m.status) + '</span> ' + m.steps + '手順' + (m.hasVideo ? '・動画' : '') + '</small></a>' +
+          '<span class="mv"><button type="button" aria-label="上へ" data-mmv="-1" data-id="' + esc(m.id) + '"' + (n === 0 ? ' disabled' : '') + '>▲</button>' +
+          '<button type="button" aria-label="下へ" data-mmv="1" data-id="' + esc(m.id) + '"' + (n === mine.length - 1 ? ' disabled' : '') + '>▼</button></span></div>';
+      }).join('') + '</div>';
   });
   if (!any) html += '<div class="empty">マニュアルはまだありません。<br>「＋ マニュアルを追加」から登録してください。</div>';
   if (dead.length) html += '<details class="more"><summary>削除したマニュアル（' + dead.length + '）</summary>' +
@@ -1275,7 +1326,7 @@ function bindManualList(r){
   app.querySelectorAll('[data-mmv]').forEach(b => b.onclick = async () => {
     if (busy) return;
     const m = r.manuals.find(x => x.id === b.dataset.id);
-    const group = r.manuals.filter(x => x.status !== '削除済' && x.facilityId === m.facilityId && x.placeId === m.placeId);
+    const group = r.manuals.filter(x => x.status !== '削除済' && x.facilityId === m.facilityId);
     const pos = group.indexOf(m), to = pos + Number(b.dataset.mmv);
     if (to < 0 || to >= group.length) return;
     const before = r.manuals.map(x => ({ id: x.id, sort: x.sort }));
@@ -1343,7 +1394,6 @@ async function pageManualEdit(id){
     '<section class="card form"><h3 class="ch">基本情報</h3>' +
       '<label class="fld"><span>タイトル<i class="req">必須</i></span><input id="mfTitle" maxlength="80" value="' + esc(ed.title) + '" placeholder="例：201号室のベッドメイキング"></label>' +
       '<label class="fld"><span>施設<i class="req">必須</i></span><select id="mfFac">' + r.facilities.filter(f => f.active || f.id === ed.facilityId).map(f => opt(f.id, f.name, f.id === ed.facilityId)).join('') + '</select></label>' +
-      '<label class="fld"><span>部屋・場所</span><select id="mfPlace"></select><small class="hint">部屋が一覧にない場合は「部屋・場所の管理」で追加できます。</small></label>' +
       '<div class="fld"><span>公開状態</span><div class="seg">' + ['公開', '下書き'].map(v => '<label><input type="radio" name="mfStatus" value="' + v + '"' + (ed.status === v ? ' checked' : '') + '><span>' + v + '</span></label>').join('') +
         '</div><small class="hint">「下書き」はスタッフ画面に表示されません。作りかけの間は下書きにしておけます。</small></div>' +
     '</section>' +
@@ -1371,15 +1421,7 @@ async function pageManualEdit(id){
 
 function bindManualEdit(r, ed, nextKey){
   const f = $('#mfForm'); trackDirty(f);
-  const facSel = $('#mfFac'), placeSel = $('#mfPlace');
-  const fillPlaces = () => {
-    const opts = r.places.filter(p => p.facilityId === facSel.value && (p.active || p.id === ed.placeId));
-    placeSel.innerHTML = '<option value="">施設共通（トイレ・共用部など）</option>' +
-      opts.map(p => '<option value="' + esc(p.id) + '"' + (p.id === ed.placeId ? ' selected' : '') + '>' + esc(p.name) + (p.active ? '' : '（使用停止中）') + '</option>').join('');
-  };
-  fillPlaces();
-  facSel.onchange = () => { ed.placeId = ''; fillPlaces(); };
-  placeSel.onchange = () => { ed.placeId = placeSel.value; };
+  const facSel = $('#mfFac');
   if (!ed.id) setTimeout(() => $('#mfTitle').focus(), 50);
 
   /* ---- 手順 ---- */
@@ -1447,7 +1489,7 @@ function bindManualEdit(r, ed, nextKey){
 
   /* ---- フォームの値を集める ---- */
   const collect = () => ({
-    id: ed.id, title: $('#mfTitle').value.trim(), facilityId: facSel.value, placeId: placeSel.value,
+    id: ed.id, title: $('#mfTitle').value.trim(), facilityId: facSel.value,
     // 作業カテゴリーは画面から削除（2026-10）。既存データを消さないよう、読み込んだ値をそのまま送り返す
     categoryId: ed.categoryId || '',
     status: (f.querySelector('input[name=mfStatus]:checked') || {}).value || '下書き',
@@ -1525,7 +1567,7 @@ function shrinkImage(file, max = 1600, quality = 0.82){
 /** スタッフ画面と同じ見た目で確認する（保存前・下書きでも確認できる） */
 function showPreview(r, d, localUrls){
   const pm = {
-    id: '__preview', facilityId: d.facilityId, placeId: d.placeId, categoryId: d.categoryId, title: d.title || '（タイトル未入力）',
+    id: '__preview', facilityId: d.facilityId, placeId: '', categoryId: d.categoryId, title: d.title || '（タイトル未入力）',
     purpose: d.purpose.trim(), tools: d.tools, cautions: d.cautions, completion: d.completion.trim(), finalChecks: d.finalChecks,
     videoId: driveIdOf(d.video), updatedAt: '', steps: d.steps.map((st, i) => ({ no: i + 1, text: st.text, imageId: st.imageId, important: st.important })),
   };
@@ -1547,80 +1589,29 @@ function showPreview(r, d, localUrls){
   ov.querySelector('.pvclose').onclick = () => { ov.remove(); document.body.style.overflow = ''; };
 }
 
-/* ---------- 部屋・場所の管理 ---------- */
-async function pagePlaces(id, facId){
-  const frame = id
-    ? { title: id === 'new' ? '部屋・場所を追加' : '部屋・場所を編集', sub: '部屋・場所の管理', back: 'admin/places', noHome: true, admin: true }
-    : { title: '部屋・場所の管理', sub: 'マニュアル管理', back: 'admin/manuals', noHome: true, admin: true };
-  const r = await adminLoad('manualAdminList', frame);
-  if (!r) return;
-  const facs = r.facilities.filter(f => f.active);
-  if (!manFilter || !facs.some(f => f.id === manFilter)) manFilter = (facs[0] || {}).id || '';
-  if (!id){
-    const count = pid => r.manuals.filter(m => m.status !== '削除済' && m.placeId === pid).length;
-    const chip = f => '<button type="button" class="fchip' + (manFilter === f.id ? ' on' : '') + '" data-pf2="' + esc(f.id) + '">' + esc(f.name) + '</button>';
-    const list = r.places.filter(p => p.facilityId === manFilter);
-    const html = '<div class="fchips">' + facs.map(chip).join('') + '</div>' +
-      '<a class="btn primary add" href="#/admin/places/new/' + encodeURIComponent(manFilter) + '">＋ 部屋・場所を追加</a>' +
-      '<p class="hint" style="margin:8px 4px">トイレや共用部など、どの部屋にも当てはまらない作業は「施設共通」として登録できるため、ここに追加する必要はありません。</p>' +
-      (list.length ? '<div class="list">' + list.map(p => '<a class="row" href="#/admin/places/' + encodeURIComponent(p.id) + '"' + (p.active ? '' : ' style="opacity:.6"') + '><span class="ic">🚪</span><span class="tx"><b>' + esc(p.name) + '</b><small>' +
-        (p.active ? 'マニュアル ' + count(p.id) + '件' : '使用停止中・スタッフ画面に表示されません') + '</small></span>' + CHEV + '</a>').join('') + '</div>'
-        : '<div class="empty">この施設には部屋・場所がまだありません。</div>');
-    return showView(Object.assign({}, frame, { html, after: () => {
-      document.querySelectorAll('[data-pf2]').forEach(b => b.onclick = () => { manFilter = b.dataset.pf2; renderAdmin(); });
-    }}));
-  }
-  const pl = id === 'new' ? { id: '', facilityId: facId || manFilter, name: '', active: true } : r.places.find(p => p.id === id);
-  if (!pl) return showView(Object.assign({}, frame, { html: '<div class="empty">' + ERR_TEXT.not_found + '</div>' }));
-  const fname = (r.facilities.find(f => f.id === pl.facilityId) || {}).name || '';
-  const html = '<form class="card form" id="plForm" novalidate>' +
-    '<p class="kv"><span>施設</span><b>' + esc(fname) + '</b></p>' +
-    '<label class="fld"><span>部屋・場所の名前<i class="req">必須</i></span><input id="plName" maxlength="40" value="' + esc(pl.name) + '" placeholder="例：201号室、ドミトリー、2階シャワー室"></label>' +
-    (pl.id ? '<label class="switch"><input type="checkbox" id="plActive"' + (pl.active ? ' checked' : '') + '><span class="sw"></span><span class="lb">この部屋・場所を使う' +
-      '<small>オフにすると、この部屋とそのマニュアルがスタッフ画面に表示されなくなります。マニュアル自体は消えません。</small></span></label>' : '') +
-    '<div class="msg err" id="plErr" hidden></div>' +
-    '<div class="savebar"><button class="btn primary" id="plSave" type="submit">' + (pl.id ? '変更を保存' : '追加する') + '</button></div></form>';
-  showView(Object.assign({}, frame, { html, after: () => {
-    const f = $('#plForm'); trackDirty(f);
-    if (!pl.id) setTimeout(() => $('#plName').focus(), 50);
-    const rid = reqId();
-    f.onsubmit = e => {
-      e.preventDefault();
-      const name = $('#plName').value.trim();
-      if (!name){ const el = $('#plErr'); el.textContent = '名前を入力してください。'; el.hidden = false; return; }
-      manFilter = pl.facilityId;
-      submitForm($('#plSave'), $('#plErr'), 'savePlace', { id: pl.id, facilityId: pl.facilityId, name, active: pl.id ? $('#plActive').checked : true, reqId: rid }, 'admin/places')
-        .then(() => load());
-    };
-  }}));
-}
-
 /* ---------- デモ用：マニュアル管理（GAS_URLが空のときだけ） ---------- */
 function demoManuals(){
   if (!DEMO_DB.man){
     DEMO_DB.man = DEMO_DATA.manuals.map((m, i) => Object.assign(JSON.parse(JSON.stringify(m)), { status: '公開', sort: i + 1, deletedAt: 0, video: '', updatedAt: 1 }));
-    DEMO_DB.places = DEMO_DATA.places.map(p => Object.assign({ active: true }, p));
   }
   return DEMO_DB.man;
 }
 function demoSync(){
-  const act = new Set(DEMO_DB.places.filter(p => p.active).map(p => p.id));
-  DEMO_DATA.places = DEMO_DB.places.filter(p => p.active).map(p => ({ id: p.id, facilityId: p.facilityId, name: p.name }));
-  DEMO_DATA.manuals = demoManuals().filter(m => m.status === '公開' && (!m.placeId || act.has(m.placeId))).sort((a, b) => a.sort - b.sort)
+  DEMO_DATA.manuals = demoManuals().filter(m => m.status === '公開').sort((a, b) => a.sort - b.sort)
     .map(m => Object.assign({}, m, { videoId: driveIdOf(m.video), steps: m.steps.map((s, i) => Object.assign({ no: i + 1 }, s)) }));
   DATA = DEMO_DATA;
 }
 function demoManualApi(action, p){
   const list = demoManuals();
   const facs = DEMO_DATA.facilities.map(f => ({ id: f.id, name: f.name, active: true }));
-  if (action === 'manualAdminList') return { ok: true, facilities: facs, places: DEMO_DB.places.slice(), categories: DEMO_DATA.categories, restoreDays: 30,
+  if (action === 'manualAdminList') return { ok: true, facilities: facs, places: DEMO_DATA.places, categories: DEMO_DATA.categories, restoreDays: 30,
     manuals: list.map(m => ({ id: m.id, title: m.title, facilityId: m.facilityId, placeId: m.placeId, categoryId: m.categoryId, status: m.status, sort: m.sort, steps: m.steps.length, hasVideo: !!m.video, updatedAt: m.updatedAt, deletedAt: m.deletedAt })).sort((a, b) => a.sort - b.sort) };
   if (action === 'manualGet'){ const m = list.find(x => x.id === p.id); return m ? { ok: true, manual: JSON.parse(JSON.stringify(m)) } : { ok: false, error: 'not_found' }; }
   if (action === 'uploadImage') return { ok: false, error: 'demo' };
   if (action === 'saveManual'){
     let m = p.id ? list.find(x => x.id === p.id) : null;
     if (!m){ m = { id: 'MAN-' + String(list.length + 1).padStart(3, '0'), sort: list.length + 1, deletedAt: 0 }; list.push(m); }
-    Object.assign(m, { title: p.title, facilityId: p.facilityId, placeId: p.placeId, categoryId: p.categoryId, status: p.status, purpose: p.purpose, tools: p.tools,
+    Object.assign(m, { title: p.title, facilityId: p.facilityId, placeId: m.facilityId === p.facilityId ? (m.placeId || '') : '', categoryId: p.categoryId, status: p.status, purpose: p.purpose, tools: p.tools,
       cautions: p.cautions, completion: p.completion, finalChecks: p.finalChecks, video: p.video, steps: p.steps, updatedAt: Date.now() });
     demoSync(); return { ok: true, id: m.id };
   }
@@ -1633,12 +1624,6 @@ function demoManualApi(action, p){
     const sorts = p.ids.map(id => list.find(x => x.id === id).sort).sort((a, b) => a - b);
     p.ids.forEach((id, i) => { list.find(x => x.id === id).sort = sorts[i]; });
     demoSync(); return { ok: true };
-  }
-  if (action === 'savePlace'){
-    let pl = p.id ? DEMO_DB.places.find(x => x.id === p.id) : null;
-    if (!pl){ pl = { id: 'PLC-' + String(DEMO_DB.places.length + 1).padStart(3, '0'), facilityId: p.facilityId }; DEMO_DB.places.push(pl); }
-    Object.assign(pl, { name: p.name, active: p.active !== false });
-    demoSync(); return { ok: true, id: pl.id };
   }
   return { ok: false, error: 'unknown_action' };
 }
