@@ -303,6 +303,57 @@ form#mfForm .card{margin-bottom:14px}
 .fswitch{margin:0 0 4px}
 .fswitch .fchip{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
 .fswitch .fchip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+/* ---- 2026-11-01：OK写真・NG写真 ---- */
+:root{--ok-ink:#17643f;--ok-bg:#e6f5ec;--ok-line:#2e9e65;--ng-ink:#9b1c1c;--ng-bg:#fdecec;--ng-line:#d64545}
+.okng-badge{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;border-radius:999px;padding:4px 12px 4px 6px;line-height:1.3}
+.okng-badge>span{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;color:#fff;font-size:12px}
+.okng-badge.ok{background:var(--ok-bg);color:var(--ok-ink)}.okng-badge.ok>span{background:var(--ok-line)}
+.okng-badge.ng{background:var(--ng-bg);color:var(--ng-ink)}.okng-badge.ng>span{background:var(--ng-line)}
+/* スタッフ画面 */
+.okng{display:grid;gap:12px;margin-top:10px}
+@media (min-width:700px){.okng.both{grid-template-columns:1fr 1fr}}
+.okng-col{border-radius:12px;padding:10px;border:2px solid}
+.okng-col.ok{border-color:#b9e2cb;background:#f6fcf8}
+.okng-col.ng{border-color:#f1bcbc;background:#fff8f8}
+.okng-photos{display:grid;gap:8px;margin-top:8px}
+.okng-photos.multi{grid-template-columns:1fr 1fr}
+.okng-photos figure{margin:0}
+.okng-photos .photo{margin-top:0}
+.okng-photos .photo img{aspect-ratio:4/3;min-height:0}
+.okng-photos figcaption{font-size:14px;line-height:1.5;margin-top:4px;color:#2c3f3c}
+.vlab{position:absolute;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);font-size:16px;padding:8px 16px 8px 8px;max-width:calc(100% - 32px);flex-wrap:wrap}
+.vlab small{font-weight:600;font-size:14px;margin-left:4px}
+.vlab[hidden]{display:none}
+/* 管理画面 */
+.pgrps{display:grid;gap:10px;margin-top:10px}
+@media (min-width:700px){.pgrps{grid-template-columns:1fr 1fr}}
+.pgrp{border-radius:12px;padding:10px;border:1.5px solid}
+.pgrp.ok{border-color:#b9e2cb;background:#f6fcf8}
+.pgrp.ng{border-color:#f1bcbc;background:#fff8f8}
+.pglab{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pglab small{color:var(--sub);font-size:13px}
+.ptiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.ptile{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px;min-width:0}
+.pimg{position:relative;border-radius:8px;overflow:hidden;background:#eef2f1;aspect-ratio:4/3}
+.pimg img{display:block;width:100%;height:100%;object-fit:cover}
+.ptile input{width:100%;height:40px;margin-top:6px;border:1.5px solid #c9d6d3;border-radius:8px;padding:0 8px;font-size:15px;background:#fff;color:var(--ink)}
+.ptile input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.pbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:6px}
+.pbtns button{height:40px;border-radius:8px;border:1px solid var(--line);background:#f7faf9;color:#33504c;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pbtns button:disabled{opacity:.3;cursor:default}
+.pbtns .pdel{color:var(--danger-ink);background:var(--danger-bg);border-color:#f3b7b7}
+.pbtns .pdel svg{width:18px;height:18px}
+.padd{width:100%;margin-top:8px;font-weight:700;background:#fff}
+.padd.ok{border-color:var(--ok-line);color:var(--ok-ink)}
+.padd.ng{border-color:var(--ng-line);color:var(--ng-ink)}
+.legacy{margin-top:10px;border:1.5px dashed #b8c6c3;border-radius:12px;padding:10px;background:#fbfcfc}
+.lghead{font-size:14px;font-weight:700;color:#33504c}
+.lgbody{display:grid;grid-template-columns:120px 1fr;gap:10px;margin-top:8px;align-items:start}
+.lgbody img{width:120px;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#eef2f1}
+.lgbtns{display:flex;flex-direction:column;gap:6px}
+.lgbtns .btn{width:100%;height:40px;font-size:14px}
+.btn.mv-ok{background:var(--ok-bg);color:var(--ok-ink);border:1.5px solid var(--ok-line)}
+.btn.mv-ng{background:var(--ng-bg);color:var(--ng-ink);border:1.5px solid var(--ng-line)}
 </style>
 </head>
 <body>
@@ -322,6 +373,7 @@ form#mfForm .card{margin-bottom:14px}
 
 <div class="viewer" id="viewer" role="dialog" aria-label="写真の拡大表示">
   <img id="viewerImg" alt="">
+  <div id="viewerLab" class="vlab" hidden></div>
   <button id="viewerClose" aria-label="閉じる">×</button>
 </div>
 
@@ -530,8 +582,9 @@ function viewManual(mid){
 
   if (m.steps.length) html += '<section class="block"><h3><span class="b">📋</span>作業手順</h3><ol class="steps">' +
     m.steps.map((s, i) => '<li class="step' + (s.important ? ' imp' : '') + '"><span class="no">' + (i + 1) + '</span><div class="body">' +
-      (s.important ? '<span class="tag">重要</span>' : '') + '<p>' + esc(s.text).replace(/\n/g, '<br>') + '</p>' +
+      (s.important ? '<span class="tag">重要</span>' : '') + (s.text ? '<p>' + esc(s.text).replace(/\n/g, '<br>') + '</p>' : '') +
       (s.imageId ? '<button class="photo" data-id="' + esc(s.imageId) + '" aria-label="写真を拡大"><img loading="lazy" alt="手順' + (i + 1) + 'の写真" src="' + imgUrl(s.imageId, 1000) + '" onerror="this.parentNode.classList.add(\'broken\')"><div class="err">写真を読み込めません</div></button>' : '') +
+      okngHtml(s, i) +
       '</div></li>').join('') + '</ol></section>';
 
   if (m.completion) html += '<section class="block"><h3><span class="b">✨</span>清掃完了時の正しい状態</h3><div class="done">' + esc(m.completion).replace(/\n/g, '<br>') + '</div></section>';
@@ -545,8 +598,25 @@ function viewManual(mid){
   return { title: m.title.replace(/^【サンプル】/, ''), sub: f.name || '', back: 'f/' + encodeURIComponent(m.facilityId), html, after: () => bindManual(m) };
 }
 
+/**
+ * 手順のOK写真・NG写真（2026-11-01追加）
+ * スマホでは縦に「OK → NG」、PC（幅700px以上）ではOKとNGを左右に並べて比較できるようにする
+ */
+const OKNG = { ok: { label: 'OK｜正しい例', mark: '✓' }, ng: { label: 'NG｜間違った例', mark: '✕' } };
+function okngHtml(s, i){
+  const ok = s.ok || [], ng = s.ng || [];
+  if (!ok.length && !ng.length) return '';
+  const grp = (g, list) => !list.length ? '' :
+    '<div class="okng-col ' + g + '"><div class="okng-badge ' + g + '"><span aria-hidden="true">' + OKNG[g].mark + '</span>' + OKNG[g].label + '</div>' +
+    '<div class="okng-photos' + (list.length > 1 ? ' multi' : '') + '">' + list.map((ph, n) =>
+      '<figure><button class="photo" data-id="' + esc(ph.id) + '" data-label="' + g + '" data-cap="' + esc(ph.c || '') + '" aria-label="' + OKNG[g].label + ' ' + (n + 1) + '枚目を拡大">' +
+      '<img loading="lazy" alt="手順' + (i + 1) + 'の' + OKNG[g].label + (ph.c ? '：' + esc(ph.c) : '') + '" src="' + imgUrl(ph.id, 1000) + '" onerror="this.parentNode.classList.add(\'broken\')"><div class="err">写真を読み込めません</div></button>' +
+      (ph.c ? '<figcaption>' + esc(ph.c) + '</figcaption>' : '') + '</figure>').join('') + '</div></div>';
+  return '<div class="okng' + (ok.length && ng.length ? ' both' : '') + '">' + grp('ok', ok) + grp('ng', ng) + '</div>';
+}
+
 function bindManual(m){
-  document.querySelectorAll('.photo').forEach(b => b.onclick = () => openViewer(b.dataset.id));
+  document.querySelectorAll('.photo').forEach(b => b.onclick = () => openViewer(b.dataset.id, b.dataset.label, b.dataset.cap));
   const box = document.getElementById('checks');
   if (!box) return;
   const all = store.get(CHECKS_KEY, {});
@@ -573,7 +643,16 @@ function notFound(){
 
 /* ---------- 写真 ---------- */
 function imgUrl(id, w){ return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w' + w; }
-function openViewer(id){ $('#viewerImg').src = imgUrl(id, 2000); $('#viewer').classList.add('open'); }
+function openViewer(id, label, cap, src){
+  $('#viewerImg').src = src || imgUrl(id, 2000);
+  const lab = $('#viewerLab');
+  if (label && OKNG[label]){
+    lab.className = 'vlab okng-badge ' + label;
+    lab.innerHTML = '<span aria-hidden="true">' + OKNG[label].mark + '</span>' + OKNG[label].label + (cap ? '<small>' + esc(cap) + '</small>' : '');
+    lab.hidden = false;
+  } else lab.hidden = true;
+  $('#viewer').classList.add('open');
+}
 function closeViewer(){ $('#viewer').classList.remove('open'); $('#viewerImg').src = ''; }
 $('#viewerClose').onclick = closeViewer;
 $('#viewer').onclick = e => { if (e.target.id === 'viewer') closeViewer(); };
@@ -1385,8 +1464,9 @@ async function pageManualEdit(id){
     if (m.status === '削除済') return showView(Object.assign({}, frame, { html: '<div class="empty">このマニュアルは削除されています。<br>マニュアル管理の「削除したマニュアル」から復元できます。</div>' }));
   }
   let key = 0;
-  const ed = Object.assign({}, m, { steps: m.steps.map(st => Object.assign({ key: ++key }, st)) });
-  if (!ed.steps.length) ed.steps.push({ key: ++key, text: '', imageId: '', important: false });
+  const withKeys = list => (list || []).map(x => ({ key: ++key, id: x.id, c: x.c || '' }));
+  const ed = Object.assign({}, m, { steps: m.steps.map(st => Object.assign({ key: ++key }, st, { ok: withKeys(st.ok), ng: withKeys(st.ng) })) });
+  if (!ed.steps.length) ed.steps.push({ key: ++key, text: '', imageId: '', important: false, ok: [], ng: [] });
 
   const opt = (v, label, sel) => '<option value="' + esc(v) + '"' + (sel ? ' selected' : '') + '>' + esc(label) + '</option>';
   const ta = (id, label, val, hint, rows, extra) => '<label class="fld"><span>' + label + (extra || '') + '</span><textarea id="' + id + '" rows="' + (rows || 3) + '">' + esc(val) + '</textarea>' + (hint ? '<small class="hint">' + hint + '</small>' : '') + '</label>';
@@ -1424,70 +1504,134 @@ function bindManualEdit(r, ed, nextKey){
   const facSel = $('#mfFac');
   if (!ed.id) setTimeout(() => $('#mfTitle').focus(), 50);
 
-  /* ---- 手順 ---- */
+  /* ---- 手順（2026-11-01：手順ごとに「OK写真」「NG写真」を登録） ---- */
   const box = $('#mfSteps');
+  const newStep = () => ({ key: nextKey(), text: '', imageId: '', important: false, ok: [], ng: [] });
+  const GROUPS = { ok: { label: 'OK｜正しい例', mark: '✓', add: '＋ OK写真を追加' }, ng: { label: 'NG｜間違った例', mark: '✕', add: '＋ NG写真を追加' } };
+  const MAX_PHOTOS = 10;
+  const photoSrc = ph => ph.localUrl || (ph.id ? imgUrl(ph.id, 600) : '');
+
+  const groupHtml = (st, g) => {
+    const list = st[g], G = GROUPS[g];
+    return '<div class="pgrp ' + g + '" data-g="' + g + '">' +
+      '<div class="pglab"><span class="okng-badge ' + g + '"><span aria-hidden="true">' + G.mark + '</span>' + G.label + '</span>' +
+        (list.length ? '<small>' + list.length + '枚</small>' : '') + '</div>' +
+      (list.length ? '<div class="ptiles">' + list.map((ph, n) =>
+        '<div class="ptile" data-p="' + ph.key + '">' +
+          '<div class="pimg"><img src="' + esc(photoSrc(ph)) + '" alt="' + G.label + ' ' + (n + 1) + '枚目">' + (ph.uploading ? '<span class="upl">アップロード中…</span>' : '') + '</div>' +
+          '<input type="text" data-act="cap" maxlength="100" value="' + esc(ph.c) + '" placeholder="説明（任意）" aria-label="' + G.label + ' ' + (n + 1) + '枚目の説明">' +
+          '<div class="pbtns">' +
+            '<button type="button" data-act="pleft" aria-label="前へ"' + (n === 0 || ph.uploading ? ' disabled' : '') + '>◀</button>' +
+            '<button type="button" data-act="pright" aria-label="後ろへ"' + (n === list.length - 1 || ph.uploading ? ' disabled' : '') + '>▶</button>' +
+            '<button type="button" class="pdel" data-act="pdel" aria-label="この写真を削除"' + (ph.uploading ? ' disabled' : '') + '>' + TRASH_ICON + '</button>' +
+          '</div></div>').join('') + '</div>' : '') +
+      (list.length < MAX_PHOTOS
+        ? '<label class="btn ghost small padd ' + g + '"><input type="file" accept="image/*" multiple data-act="padd" hidden>' + G.add + '</label>'
+        : '<small class="hint">1つの手順につき' + MAX_PHOTOS + '枚までです</small>') +
+      '</div>';
+  };
+
   const renderSteps = () => {
     box.innerHTML = ed.steps.map((st, i) => {
-      const src = st.localUrl || (st.imageId ? imgUrl(st.imageId, 600) : '');
+      const legacy = st.localUrl || (st.imageId ? imgUrl(st.imageId, 600) : '');
       return '<div class="stepcard' + (st.important ? ' imp' : '') + '" data-k="' + st.key + '">' +
         '<div class="sthead"><b>手順 ' + (i + 1) + '</b><span class="mv">' +
           '<button type="button" data-act="up" aria-label="上へ"' + (i === 0 ? ' disabled' : '') + '>▲</button>' +
           '<button type="button" data-act="down" aria-label="下へ"' + (i === ed.steps.length - 1 ? ' disabled' : '') + '>▼</button>' +
           '<button type="button" data-act="del" aria-label="この手順を削除">🗑</button></span></div>' +
         '<textarea rows="3" data-act="text" placeholder="この手順で行う作業を書いてください">' + esc(st.text) + '</textarea>' +
-        (src ? '<div class="stimg"><img src="' + esc(src) + '" alt="手順' + (i + 1) + 'の写真">' + (st.uploading ? '<span class="upl">アップロード中…</span>' : '') + '</div>' : '') +
-        '<div class="stbtns"><label class="btn ghost small"><input type="file" accept="image/*" data-act="photo" hidden>' + (src ? '📷 写真を変更' : '📷 写真を追加') + '</label>' +
-          (src && !st.uploading ? '<button type="button" class="btn ghost small" data-act="rmphoto">写真を外す</button>' : '') + '</div>' +
+        // 以前から登録されている写真（OK・NGの区別なし）。自動では分類せず、管理者が振り分ける
+        (legacy ? '<div class="legacy"><div class="lghead">以前の写真（OK・NG未分類）</div>' +
+          '<div class="lgbody"><img src="' + esc(legacy) + '" alt="手順' + (i + 1) + 'の以前の写真">' +
+          '<div class="lgbtns"><button type="button" class="btn small mv-ok" data-act="toOk">OKに移す</button>' +
+          '<button type="button" class="btn small mv-ng" data-act="toNg">NGに移す</button>' +
+          '<button type="button" class="btn ghost small" data-act="rmphoto">外す</button></div></div>' +
+          '<small class="hint">このままでもスタッフ画面に表示されます。</small></div>' : '') +
+        '<div class="pgrps">' + groupHtml(st, 'ok') + groupHtml(st, 'ng') + '</div>' +
         '<label class="chk"><input type="checkbox" data-act="imp"' + (st.important ? ' checked' : '') + '><span>重要な手順として目立たせる</span></label>' +
         '</div>';
     }).join('');
   };
   renderSteps();
   const stepOf = el => ed.steps.find(s => s.key === Number(el.closest('.stepcard').dataset.k));
-  box.addEventListener('input', e => { if (e.target.dataset.act === 'text') stepOf(e.target).text = e.target.value; });
+  const photoOf = el => {
+    const st = stepOf(el), g = el.closest('.pgrp').dataset.g, k = Number(el.closest('.ptile').dataset.p);
+    return { st, g, list: st[g], idx: st[g].findIndex(p => p.key === k) };
+  };
+  box.addEventListener('input', e => {
+    if (e.target.dataset.act === 'text') stepOf(e.target).text = e.target.value;
+    if (e.target.dataset.act === 'cap'){ const o = photoOf(e.target); if (o.idx >= 0) o.list[o.idx].c = e.target.value; }
+  });
   box.addEventListener('change', async e => {
     const act = e.target.dataset.act, st = e.target.closest('.stepcard') && stepOf(e.target);
     if (act === 'imp'){ st.important = e.target.checked; e.target.closest('.stepcard').classList.toggle('imp', st.important); }
-    if (act === 'photo' && e.target.files[0]) await addPhoto(st, e.target.files[0]);
+    if (act === 'padd' && e.target.files.length){
+      const files = Array.from(e.target.files), g = e.target.closest('.pgrp').dataset.g;
+      e.target.value = '';
+      await addPhotos(st, g, files);
+    }
   });
   box.addEventListener('click', e => {
     const b = e.target.closest('button[data-act]'); if (!b) return;
-    const st = stepOf(b), i = ed.steps.indexOf(st);
-    if (b.dataset.act === 'up' && i > 0) [ed.steps[i - 1], ed.steps[i]] = [ed.steps[i], ed.steps[i - 1]];
-    if (b.dataset.act === 'down' && i < ed.steps.length - 1) [ed.steps[i + 1], ed.steps[i]] = [ed.steps[i], ed.steps[i + 1]];
-    if (b.dataset.act === 'del'){
-      if ((st.text || st.imageId) && !confirm('手順 ' + (i + 1) + ' を削除しますか？')) return;
+    const st = stepOf(b), i = ed.steps.indexOf(st), act = b.dataset.act;
+    if (act === 'up' && i > 0) [ed.steps[i - 1], ed.steps[i]] = [ed.steps[i], ed.steps[i - 1]];
+    if (act === 'down' && i < ed.steps.length - 1) [ed.steps[i + 1], ed.steps[i]] = [ed.steps[i], ed.steps[i + 1]];
+    if (act === 'del'){
+      if ((st.text || st.imageId || st.ok.length || st.ng.length) && !confirm('手順 ' + (i + 1) + ' を削除しますか？（この手順の写真も外れます）')) return;
       ed.steps.splice(i, 1);
-      if (!ed.steps.length) ed.steps.push({ key: nextKey(), text: '', imageId: '', important: false });
+      if (!ed.steps.length) ed.steps.push(newStep());
     }
-    if (b.dataset.act === 'rmphoto'){ st.imageId = ''; st.localUrl = ''; }
+    if (act === 'rmphoto'){ st.imageId = ''; st.localUrl = ''; }
+    if (act === 'toOk' || act === 'toNg'){
+      const g = act === 'toOk' ? 'ok' : 'ng';
+      if (st[g].length >= MAX_PHOTOS){ toast(GROUPS[g].label + 'は' + MAX_PHOTOS + '枚までです'); return; }
+      st[g].push({ key: nextKey(), id: st.imageId, c: '', localUrl: st.localUrl || '' });
+      st.imageId = ''; st.localUrl = '';
+    }
+    if (act === 'pleft' || act === 'pright' || act === 'pdel'){
+      const o = photoOf(b); if (o.idx < 0) return;
+      if (act === 'pdel') o.list.splice(o.idx, 1); // この写真だけを外す（Drive上のファイルは消さない）
+      else {
+        const to = o.idx + (act === 'pleft' ? -1 : 1);
+        if (to < 0 || to >= o.list.length) return;
+        [o.list[o.idx], o.list[to]] = [o.list[to], o.list[o.idx]];
+      }
+    }
     setDirty(true); renderSteps();
   });
   $('#mfAddStep').onclick = () => {
-    ed.steps.push({ key: nextKey(), text: '', imageId: '', important: false });
+    ed.steps.push(newStep());
     setDirty(true); renderSteps();
     const last = box.querySelector('.stepcard:last-child textarea'); if (last){ last.focus(); last.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
   };
 
-  async function addPhoto(st, file){
+  /** 写真を1枚ずつ縮小してからアップロード（複数選択に対応）。失敗した写真だけを取り除く */
+  async function addPhotos(st, g, files){
     setDirty(true);
-    let shrunk;
-    try{ shrunk = await shrinkImage(file); }
-    catch(e){ toast('この写真は読み込めませんでした。別の写真をお試しください'); return; }
-    st.localUrl = shrunk.dataUrl; st.uploading = true; renderSteps();
-    try{
-      const res = await adminApi('uploadImage', { data: shrunk.base64, mime: 'image/jpeg', reqId: reqId() });
-      if (!res.ok) throw new Error(res.message || res.error);
-      st.imageId = res.imageId;
-    }catch(e){
-      if (e.message === 'unauthorized') return;
-      st.localUrl = '';
-      toast(e.message === 'demo' ? 'デモ表示では写真をアップロードできません' : '写真をアップロードできませんでした。電波の良い場所でもう一度お試しください');
+    const room = MAX_PHOTOS - st[g].length;
+    if (files.length > room) toast(GROUPS[g].label + 'は' + MAX_PHOTOS + '枚までのため、' + room + '枚だけ追加します');
+    for (const file of files.slice(0, Math.max(0, room))){
+      let shrunk;
+      try{ shrunk = await shrinkImage(file); }
+      catch(e){ toast('読み込めない写真がありました。別の写真をお試しください'); continue; }
+      const ph = { key: nextKey(), id: '', c: '', localUrl: shrunk.dataUrl, uploading: true };
+      st[g].push(ph); renderSteps();
+      try{
+        const res = await adminApi('uploadImage', { data: shrunk.base64, mime: 'image/jpeg', reqId: reqId() });
+        if (!res.ok) throw new Error(res.message || res.error);
+        ph.id = res.imageId; ph.uploading = false;
+      }catch(e){
+        const at = st[g].indexOf(ph); if (at >= 0) st[g].splice(at, 1);
+        if (e.message === 'unauthorized') return;
+        toast(e.message === 'demo' ? 'デモ表示では写真をアップロードできません' : '写真をアップロードできませんでした。電波の良い場所でもう一度お試しください');
+      }
+      renderSteps();
     }
-    st.uploading = false; renderSteps();
   }
+  const uploading = () => ed.steps.some(st => st.uploading || st.ok.some(p => p.uploading) || st.ng.some(p => p.uploading));
 
   /* ---- フォームの値を集める ---- */
+  const pack = list => list.filter(p => p.id && !p.uploading).map(p => ({ id: p.id, c: (p.c || '').trim() }));
   const collect = () => ({
     id: ed.id, title: $('#mfTitle').value.trim(), facilityId: facSel.value,
     // 作業カテゴリーは画面から削除（2026-10）。既存データを消さないよう、読み込んだ値をそのまま送り返す
@@ -1496,18 +1640,26 @@ function bindManualEdit(r, ed, nextKey){
     // 「作業の目的」「必要な用具」は画面から削除（2026-10）。既存データを消さないよう、読み込んだ値をそのまま送り返す
     purpose: ed.purpose || '', tools: ed.tools || [], cautions: linesOf($('#mfCautions').value),
     completion: $('#mfCompletion').value, finalChecks: linesOf($('#mfChecks').value), video: $('#mfVideo').value.trim(),
-    steps: ed.steps.map(st => ({ text: st.text.trim(), imageId: st.imageId || '', important: !!st.important })).filter(st => st.text || st.imageId),
+    steps: ed.steps.map(st => ({ text: st.text.trim(), imageId: st.imageId || '', important: !!st.important, ok: pack(st.ok), ng: pack(st.ng) }))
+      .filter(st => st.text || st.imageId || st.ok.length || st.ng.length),
   });
 
   // プレビューでは、アップロード直後の写真も確実に見えるよう、端末内の写真を優先して使う
-  $('#mfPreview').onclick = () => showPreview(r, collect(), ed.steps.filter(st => st.text.trim() || st.imageId).map(st => st.localUrl || ''));
+  $('#mfPreview').onclick = () => {
+    const local = {};
+    ed.steps.forEach(st => {
+      if (st.imageId && st.localUrl) local[st.imageId] = st.localUrl;
+      st.ok.concat(st.ng).forEach(p => { if (p.id && p.localUrl) local[p.id] = p.localUrl; });
+    });
+    showPreview(r, collect(), local);
+  };
 
   const err = $('#mfErr'), saveBtn = $('#mfSave'), rid = reqId();
   const showErr = t => { err.textContent = t; err.hidden = false; err.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
   f.onsubmit = async e => {
     e.preventDefault();
     const d = collect();
-    if (ed.steps.some(st => st.uploading)) return showErr('写真のアップロードが終わるまでお待ちください。');
+    if (uploading()) return showErr('写真のアップロードが終わるまでお待ちください。');
     if (!d.title) return showErr('タイトルを入力してください。');
     if (d.video && !driveIdOf(d.video)) return showErr('動画のリンクが正しくありません。Googleドライブの共有リンクを貼り付けてください。');
     if (d.status === '公開' && !d.steps.length) return showErr('公開するには、手順を1つ以上入力してください（下書きなら保存できます）。');
@@ -1569,7 +1721,7 @@ function showPreview(r, d, localUrls){
   const pm = {
     id: '__preview', facilityId: d.facilityId, placeId: '', categoryId: d.categoryId, title: d.title || '（タイトル未入力）',
     purpose: d.purpose.trim(), tools: d.tools, cautions: d.cautions, completion: d.completion.trim(), finalChecks: d.finalChecks,
-    videoId: driveIdOf(d.video), updatedAt: '', steps: d.steps.map((st, i) => ({ no: i + 1, text: st.text, imageId: st.imageId, important: st.important })),
+    videoId: driveIdOf(d.video), updatedAt: '', steps: d.steps.map((st, i) => ({ no: i + 1, text: st.text, imageId: st.imageId, important: st.important, ok: st.ok, ng: st.ng })),
   };
   const saved = DATA;
   DATA = { facilities: r.facilities, places: r.places, categories: r.categories, manuals: [pm] };
@@ -1579,12 +1731,12 @@ function showPreview(r, d, localUrls){
   ov.className = 'pv'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'プレビュー');
   ov.innerHTML = '<div class="pvbar"><b>プレビュー（スタッフ画面の見え方）</b><button type="button" class="pvclose">閉じる</button></div><div class="pvbody"><main>' + view.html + '</main></div>';
   document.body.appendChild(ov); document.body.style.overflow = 'hidden';
-  (localUrls || []).forEach((url, i) => {
-    if (!url) return;
-    const img = ov.querySelectorAll('.step')[i] && ov.querySelectorAll('.step')[i].querySelector('.photo img');
-    if (img){ img.src = url; img.parentNode.classList.remove('broken'); img.parentNode.onclick = null; }
+  // アップロードしたばかりの写真は、端末内の写真で表示する（Drive側の準備を待たずに確認できるように）
+  ov.querySelectorAll('.photo').forEach(b => {
+    const url = (localUrls || {})[b.dataset.id];
+    if (url){ const img = b.querySelector('img'); img.src = url; b.classList.remove('broken'); }
+    b.onclick = () => openViewer(b.dataset.id, b.dataset.label, b.dataset.cap, url);
   });
-  ov.querySelectorAll('.photo').forEach(b => { if (!b.onclick) b.onclick = () => openViewer(b.dataset.id); });
   ov.querySelectorAll('.checks button').forEach(b => b.onclick = () => b.classList.toggle('on'));
   ov.querySelector('.pvclose').onclick = () => { ov.remove(); document.body.style.overflow = ''; };
 }
